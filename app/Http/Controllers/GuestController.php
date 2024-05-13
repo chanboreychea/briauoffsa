@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\Department;
 use App\enum\MeetingLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -11,8 +12,9 @@ class GuestController extends Controller
     public function index()
     {
         session()->flush();
+        $departments = Department::DEPARTMENTS;
         $meetingLevel = MeetingLevel::MEETING_LEVEL;
-        return view('guest.guestRequest', compact('meetingLevel'));
+        return view('guest.guestRequest', compact('meetingLevel', 'departments'));
     }
 
     public function getCode(Request $request)
@@ -36,6 +38,7 @@ class GuestController extends Controller
             'phoneNumber' => $request->input('phoneNumber'),
             'email' => $request->input('email'),
             'meetingLevel' => $request->input('meetingLevel'),
+            'interOfficeOrDepartmental' => $request->input('interOfficeOrDepartmental'),
             'random' => mt_rand(100000, 999999),
             'created_at_random' => Carbon::now()->format('Y-m-d h:i:s a')
         ]);
@@ -75,6 +78,6 @@ class GuestController extends Controller
             //     'created_at_random' => session('created_at_random')
             // ]);
         }
-        return redirect()->back()->with('message', 'សូមព្យាយាមម្ដងទៀត សូមអរគុណ។');
+        return redirect('/guests')->with('message', 'សូមព្យាយាមម្ដងទៀត សូមអរគុណ។');
     }
 }

@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Enum\Status;
-use App\Models\User;
-use App\Models\Booking;
+use App\Models\Guest;
 use App\Enum\Department;
 use App\enum\MeetingLevel;
 use Illuminate\Http\Request;
@@ -14,29 +13,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\BookingMeetingRoomExport;
-use App\Models\guest;
 
 class BookingMeetingRoomController extends Controller
 {
     public function showBookingMeetingRooms()
     {
 
-        // if (session('is_user_logged_in')) {
-        //     return redirect('/calendar');
-        // }
-
         if (session('is_admin_logged_in')) {
             return redirect('/booking');
         }
-
-        session()->flush();
 
         $meetingLevel = MeetingLevel::MEETING_LEVEL;
 
         $booking = DB::table('booking_meeting_rooms')
             ->join('guests', 'guests.bookingId', '=', 'booking_meeting_rooms.id')
             ->where('booking_meeting_rooms.date', '>=', Carbon::now()->format('Y-m-01'))
-            // ->where('isApprove', Status::APPROVE)
             ->orderByDesc('date')
             ->select(
                 'guests.email',
@@ -113,20 +104,6 @@ class BookingMeetingRoomController extends Controller
         return view('admin.booking.index', compact('booking', 'isApproveBooking', 'departments', 'meetingLevel'));
     }
 
-    public function showUserBooking()
-    {
-        // $last_thirtyDay = $this->getDatesByPeriodName('last_30_days', Carbon::now());
-
-        $booking = BookingMeetingRoom::where('userId', session('user_id'))
-
-            // ->whereBetween('date', [$last_thirtyDay[0], $last_thirtyDay[1]])
-            // ->where('date', '>=', Carbon::now())
-            ->orderByDesc('date')->limit(30)
-            ->get();
-
-        return view('user.booking.showUserBooking', compact('booking'));
-    }
-
     public function exportBookingMeetingRoom(Request $request)
     {
         $previousUrl = URL::previous();
@@ -183,13 +160,6 @@ class BookingMeetingRoomController extends Controller
         $booking = $query->where('isApprove', '=', Status::APPROVE)->orderByDesc('date')->get();
 
         return Excel::download(new BookingMeetingRoomExport($booking), 'booking_meeting_rooms.xlsx');
-    }
-
-    public function userDestroy(Request $request, string $bookingId)
-    {
-        $booking = BookingMeetingRoom::find($bookingId);
-        $booking->delete();
-        return redirect()->back()->with('message', 'Update Successfully');
     }
 
     public function adminDestroy(Request $request, string $bookingId)
@@ -303,12 +273,9 @@ class BookingMeetingRoomController extends Controller
         $date = "ថ្ងៃ $day ទី " . $now->format('d') . " ខែ $monthKh ឆ្នាំ " . $now->format('Y');
 
         $booking = DB::table('booking_meeting_rooms')
-            // ->join('users', 'users.id', '=', 'booking_meeting_rooms.userId')
             ->where('date', $now->format('Y-m-d'))
             ->where('isApprove', Status::APPROVE)
-            // ->where('userId', session('user_id'))
             ->select(
-                // 'users.name',
                 'date',
                 'topicOfMeeting',
                 'directedBy',
@@ -357,23 +324,21 @@ class BookingMeetingRoomController extends Controller
         $topic = $request->input('topic');
         $directedBy = $request->input('directedBy');
         $nameDirectedBy = $request->input('nameDirectedBy');
-
-        $interOfficeOrDepartmentalArray = $request->input('interOfficeOrDepartmental');
-        if ($interOfficeOrDepartmentalArray) $interOfficeOrDepartmental = implode(', ', $interOfficeOrDepartmentalArray);
-        else $interOfficeOrDepartmental = null;
-
         $member = $request->input('member');
         $date = Carbon::parse($request->input('date'))->format("Y-m-d");
         $room = $request->input('room');
         $times = $request->input('times');
-        $description = $request->input('description');
+        $description = $request->input('description') ? $request->input('description') : null;
 
         $name = session('name');
         $position = session('position');
         $phoneNumber = session('phoneNumber');
         $email = session('email');
         $meetingLevel = session('meetingLevel');
-
+        $interOfficeOrDepartmentalArray = session('interOfficeOrDepartmental');
+        // if ($interOfficeOrDepartmentalArray) $interOfficeOrDepartmental = implode(', ', $interOfficeOrDepartmentalArray);
+        // else $interOfficeOrDepartmental = null;
+        $interOfficeOrDepartmental = $interOfficeOrDepartmentalArray ? implode(', ', $interOfficeOrDepartmentalArray) : null;
         DB::beginTransaction();
         try {
 
@@ -401,7 +366,7 @@ class BookingMeetingRoomController extends Controller
 
             $today = Carbon::now();
 
-            $message = "សំណើសុំប្រើប្រាស់បន្ទប់ប្រជុំ" . PHP_EOL . "ដឹកនាំដោយ៖ $directedBy " . PHP_EOL . "ប្រធានបទស្តីពី៖ $topic" . PHP_EOL .
+            $message = "សំណើសុំប្រើប្រាស់បន្ទប់ប្រជុំ" . PHP_EOL . "ដឹកនាំដោយ៖ $directedBy " . PHP_EOL . "ឈ្មោះអ្នកដឹកនាំ៖ $nameDirectedBy " . PHP_EOL . "ប្រធានបទស្តីពី៖ $topic" . PHP_EOL .
                 "ចំនួនសមាជិកចូលរួម៖ $member រូប" . PHP_EOL . "ប្រភេទបន្ទប់ប្រជុំ៖ បន្ទប់ប្រជុំ $room" . PHP_EOL . "កម្រិតប្រជុំ៖ $meetingLevel" . PHP_EOL .
                 "កាលបរិច្ឆេទកិច្ចប្រជុំ៖ $date " . PHP_EOL .
                 "ម៉ោង៖ $times" . PHP_EOL . "កាលបរិច្ឆេទស្នើសុំ៖ $today" . PHP_EOL . "អ៊ីមែល: $email" . PHP_EOL . "ឈ្មោះមន្រ្តីស្នើសុំ៖ $name";
@@ -411,6 +376,7 @@ class BookingMeetingRoomController extends Controller
             // $this->sendMessage(-1002100151991, $message, "6914906518:AAH3QI2RQRA2CVPIL67B9p6mFtQm3kZwyvU");
 
             DB::commit();
+            session()->flush();
             return redirect('/')->with('message', 'Booking Successfully.');
         } catch (\Exception $e) {
             DB::rollback();

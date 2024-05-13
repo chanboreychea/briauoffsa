@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('date', 50);
             $table->string('topicOfMeeting');
             $table->string('directedBy');
+            $table->string('nameDirectedBy', 100);
             $table->string('meetingLevel');
+            $table->string('interOfficeOrDepartmental')->nullable();
             $table->string('member');
             $table->string('room');
             $table->string('time');

@@ -1,5 +1,37 @@
 @extends('template.master')
 
+@section('message')
+    @if ($message = Session::get('message'))
+        <div class="position-absolute top-0 end-0 success-alert" id="success-alert" style="z-index:999;">
+            <div class="toast show ">
+                <div class="toast-header">
+                    <strong class="me-auto">សេចក្ដីជូនដំណឹង!!!</strong>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="toast"></button>
+                </div>
+
+                <div class="toast-body text-success">
+                    <b>{{ $message }}</b>
+                </div>
+            </div>
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="position-absolute top-0 end-0 danger-alert" id="success-alert" style="z-index:999;">
+            <div class="toast show ">
+                <div class="toast-header">
+                    <strong class="me-auto">សេចក្ដីជូនដំណឹង!!!</strong>
+                    <button type="button" class="btn-close text-white" data-bs-dismiss="toast"></button>
+                </div>
+                <div class="toast-body text-danger">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif
+@endsection
+
 @section('header-right')
     <div class="block-signin">
         <!-- <a class="text-link-bd-btom hover-up" href="page-register.html">Register</a> -->
@@ -34,22 +66,21 @@
                     <tr>
                         <td class="text-center">{{ $key + 1 }}</td>
                         <td class="text-center">{{ $item->date }}</td>
-                        <td class="text-center">{{ $item->topicOfMeeting }}</td>
+                        <td class="text-center">
+                            <div data-toggle="tooltip" data-html="true" title="{{ $item->description }}">
+                                {{ $item->topicOfMeeting }}
+                            </div>
+                        </td>
                         <td class="text-center">{{ $item->directedBy }}</td>
                         <td class="text-center">{{ $item->nameDirectedBy }}</td>
                         <td class="text-center">
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->interOfficeOrDepartmental }}">
-                                {{-- {{ $item->meetingLevel }} --}}
                                 @foreach ($meetingLevel as $key => $value)
                                     @if ($item->meetingLevel == $key)
                                         {{ $value }}
                                     @endif
                                 @endforeach
                             </div>
-                            {{-- <div class="meetingLevelShow">{{ $item->meetingLevel }}</div>
-                            <div class="showOfficeAndDepartment">
-                                {{ $item->relevantOfficeAndDepartment }}
-                            </div> --}}
                         </td>
                         <td class="text-center">
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->room }}">
