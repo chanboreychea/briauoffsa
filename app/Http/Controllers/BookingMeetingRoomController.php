@@ -128,11 +128,11 @@ class BookingMeetingRoomController extends Controller
         }
 
         $query = DB::table('booking_meeting_rooms')
-            ->join('users', 'users.id', '=', 'booking_meeting_rooms.userId')
+            ->join('guests', 'guests.bookingId', '=', 'booking_meeting_rooms.id')
             ->select(
                 'booking_meeting_rooms.id',
-                'users.name',
-                'users.email',
+                'guests.name',
+                'guests.email',
                 'date',
                 'topicOfMeeting',
                 'directedBy',
