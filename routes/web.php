@@ -1,6 +1,5 @@
 <?php
 
-use App\Enum\Department;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\UserController;

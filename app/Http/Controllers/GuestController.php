@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\Department;
-use App\enum\MeetingLevel;
+use App\Enum\MeetingLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 

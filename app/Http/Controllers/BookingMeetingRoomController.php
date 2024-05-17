@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use App\Enum\Status;
 use App\Models\Guest;
 use App\Enum\Department;
-use App\enum\MeetingLevel;
+use App\Enum\MeetingLevel;
 use Illuminate\Http\Request;
 use App\Models\BookingMeetingRoom;
 use Illuminate\Support\Facades\DB;
