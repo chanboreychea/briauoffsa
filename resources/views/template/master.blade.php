@@ -140,10 +140,10 @@
                                     <a class="" href="/admins/logout">Sign
                                         out</a>
                                 @else
-                                    <a class="" href="/login">Sign in</a>
+                                    <a class="" href="/guests">ស្នើរសុំកក់បន្ទប់ប្រជុំ</a>
                                 @endif
 
-                                @if (Session::get('is_admin_logged_in'))
+                                {{-- @if (Session::get('is_admin_logged_in'))
                                     <li class="has-children"><a href="/booking">ការកក់បន្ទប់ប្រជុំ</a>
                                     </li>
                                     <li class="has-children"><a href="/users">មន្រ្តី</a></li>
@@ -152,7 +152,7 @@
                                     <li class="has-children"><a href="/calendar">ការកក់បន្ទប់ប្រជុំ</a>
                                     </li>
                                     <li class="has-children"><a href="/booking/history">ប្រវត្តិកក់បន្ទប់ប្រជុំ</a></li>
-                                @endif
+                                @endif --}}
                             </ul>
 
                             </ul>
