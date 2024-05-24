@@ -82,7 +82,7 @@ class BookingMeetingRoomController extends Controller
         if ($fromDate && $toDate) {
             $approve->whereBetween('date', [Carbon::parse($fromDate)->format('Y-m-d'), Carbon::parse($toDate)->format('Y-m-d')]);
         } else {
-            $approve->where('date', '>=', Carbon::now()->format('Y-m-d'));
+            $approve->where('date', '>=', Carbon::now()->format('Y-m-01'));
         }
 
         if ($room) {
@@ -93,15 +93,15 @@ class BookingMeetingRoomController extends Controller
             $approve->where('directedBy', $directedBy);
         }
 
-        $isApproveBooking = $approve->where('isApprove', '!=', Status::PENDING)->orderByDesc('date')->get();
+        $isApproveBooking = $approve->orderByDesc('date')->get(); //->where('isApprove', '!=', Status::PENDING)
 
-        $booking = $pending->where('date', '>=', Carbon::now()->format('Y-m-d'))->where('isApprove', Status::PENDING)->orderByDesc('date')->get();
+        //$booking = $pending->where('date', '>=', Carbon::now()->format('Y-m-d'))->where('isApprove', Status::PENDING)->orderByDesc('date')->get();
 
         $departments = Department::DEPARTMENTS;
 
         $meetingLevel = MeetingLevel::MEETING_LEVEL;
 
-        return view('admin.booking.index', compact('booking', 'isApproveBooking', 'departments', 'meetingLevel'));
+        return view('admin.booking.index', compact( 'isApproveBooking', 'departments', 'meetingLevel'));
     }
 
     public function exportBookingMeetingRoom(Request $request)

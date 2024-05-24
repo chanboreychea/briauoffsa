@@ -66,14 +66,14 @@
                     <tr>
                         <td class="text-center">{{ $key + 1 }}</td>
                         <td class="text-center">{{ $item->date }}</td>
-                        <td class="text-center">
+                        <td class="">
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->description }}">
                                 {{ $item->topicOfMeeting }}
                             </div>
                         </td>
-                        <td class="text-center">{{ $item->directedBy }}</td>
-                        <td class="text-center">{{ $item->nameDirectedBy }}</td>
-                        <td class="text-center">
+                        <td class="">{{ $item->directedBy }}</td>
+                        <td class="">{{ $item->nameDirectedBy }}</td>
+                        <td class="">
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->interOfficeOrDepartmental }}">
                                 @foreach ($meetingLevel as $key => $value)
                                     @if ($item->meetingLevel == $key)
@@ -82,12 +82,12 @@
                                 @endforeach
                             </div>
                         </td>
-                        <td class="text-center">
+                        <td class="">
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->room }}">
                                 {{ $item->time }}
                             </div>
                         </td>
-                        <td class="text-center">{{ $item->name }}</td>
+                        <td class="">{{ $item->name }}</td>
                         </td>
                         @if ($item->isApprove == 1)
                             <td class="text-center text-success">អនុញ្ញាត</td>

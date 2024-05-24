@@ -28,7 +28,7 @@
 
 @section('contents')
 
-    <div class="card">
+    {{-- <div class="card">
         <div class="card-header bg-muted">
             <h5 class="text-danger">ការស្នើសុំកក់បន្ទប់ប្រជំុ</h5>
         </div>
@@ -119,9 +119,9 @@
             </table>
 
         </div>
-    </div>
+    </div> --}}
 
-    <div class="card mt-20">
+    <div class="card">
         <div class="card-header bg-gray">
             <form action="/booking" action="GET">
                 @csrf
@@ -193,19 +193,19 @@
                 </div>
             </form>
         </div>
-        <div class="card-body bg-gray">
+        <div class="card-body bg-gray table-responsive">
 
             <table class="table table-sm table-bordered">
                 <thead class="thead-light">
                     <th class="text-center">ល.រ</th>
                     <th class="text-center">កាលបរិច្ឆេទប្រជុំ</th>
-                    <th class="text-center">ប្រធានបទ</th>
-                    <th class="text-center">ដឹកនាំដោយ</th>
-                    <th class="text-center">ឈ្មោះអ្នកដឹកនាំ</th>
-                    <th class="text-center">កម្រិតប្រជុំ</th>
-                    <th class="text-center">ម៉ោង</th>
-                    <th class="text-center">ឈ្មោះអ្នកកក់</th>
-                    <th class="text-center">ការស្នើ</th>
+                    <th class="">ប្រធានបទ</th>
+                    <th class="">ដឹកនាំដោយ</th>
+                    <th class="">ឈ្មោះអ្នកដឹកនាំ</th>
+                    <th class="">កម្រិតប្រជុំ</th>
+                    <th class="">ម៉ោង</th>
+                    <th class="">ឈ្មោះអ្នកកក់</th>
+                    <th class="">ការស្នើ</th>
                     <th class="text-center">ពិនិត្យ</th>
                 </thead>
                 <tbody>
@@ -213,16 +213,15 @@
                         <tr>
                             <td class="text-center">{{ $key + 1 }}</td>
                             <td class="text-center">{{ $item->date }}</td>
-                            <td class="text-center">
+                            <td class="">
                                 <div data-toggle="tooltip" data-html="true" title="{{ $item->description }}">
                                     {{ $item->topicOfMeeting }}
                                 </div>
                             </td>
-                            <td class="text-center">{{ $item->directedBy }}</td>
-                            <td class="text-center">{{ $item->nameDirectedBy }}</td>
-                            <td class="text-center">
-                                <div data-toggle="tooltip" data-html="true"
-                                    title="{{ $item->interOfficeOrDepartmental }}">
+                            <td class="">{{ $item->directedBy }}</td>
+                            <td class="">{{ $item->nameDirectedBy }}</td>
+                            <td class="">
+                                <div data-toggle="tooltip" data-html="true" title="{{ $item->interOfficeOrDepartmental }}">
                                     @foreach ($meetingLevel as $key => $value)
                                         @if ($item->meetingLevel == $key)
                                             {{ $value }}
@@ -230,20 +229,22 @@
                                     @endforeach
                                 </div>
                             </td>
-                            <td class="text-center">{{ $item->time }}</td>
-                            <td class="text-center">{{ $item->name }}</td>
+                            <td class="">{{ $item->time }}</td>
+                            <td class="">{{ $item->name }}</td>
 
                             @if ($item->isApprove == 1)
-                                <td class="text-center text-success">អនុញ្ញាត</td>
+                                <td class="text-success">អនុញ្ញាត</td>
                             @elseif ($item->isApprove == 2)
-                                <td class="text-center text-danger">បដិសេធ</td>
+                                <td class="text-danger">បដិសេធ</td>
+                            @else
+                                <td class="text-primary">រងចាំ...</td>
                             @endif
 
-                            <td class="text-center">
+                            <td class="text-center ">
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                     data-target="#exampleModal{{ $item->id }}">
-                                    កែប្រែ
+                                    <i class='bx bx-edit-alt'></i>
                                 </button>
                                 <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1"
                                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -280,7 +281,7 @@
                                 </div>
                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                     data-target="#deleteRecord{{ $item->id }}">
-                                    លុប
+                                    <i class='bx bx-trash'></i>
                                 </button>
                                 <div class="modal fade" id="deleteRecord{{ $item->id }}" tabindex="-1"
                                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
