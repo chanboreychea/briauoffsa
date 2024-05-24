@@ -1,8 +1,8 @@
 <?php
 
-namespace App\enum;
+namespace App\Enum;
 
-enum MeetingLevel
+class MeetingLevel
 {
     const  MEETING_LEVEL = [
         1 => 'កិច្ចប្រជុំក្រុមការងារបច្ចេកទេស',

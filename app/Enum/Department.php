@@ -2,7 +2,7 @@
 
 namespace App\Enum;
 
-enum Department
+class Department
 {
     const DEPARTMENTS = array(
         'កិច្ចការទូទៅ' => array('គ្រប់គ្រងព័ត៌មានវិទ្យា', 'រដ្ឋបាល និង ហិរញ្ញវត្ថុ', 'ផែនការ និង បណ្តុះបណ្តាល'),
