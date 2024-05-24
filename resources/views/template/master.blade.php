@@ -135,12 +135,12 @@
                         <nav>
                             <ul class="mobile-menu font-heading">
                                 @if (Session::get('is_user_logged_in'))
-                                    <a class="" href="/logout">Sign out</a>
+                                    <li class="has-children"><a href="/logout">ចាកចេញ</a></li>
                                 @elseif (Session::get('is_admin_logged_in'))
-                                    <a class="" href="/admins/logout">Sign
-                                        out</a>
+                                    <li class="has-children"><a href="/admins/logout">ចាកចេញ</a></li>
                                 @else
-                                    <a class="" href="/guests">ស្នើរសុំកក់បន្ទប់ប្រជុំ</a>
+                                    <li class="has-children"><a class=""
+                                            href="/guests">ស្នើរសុំកក់បន្ទប់ប្រជុំ</a></li>
                                 @endif
 
                                 {{-- @if (Session::get('is_admin_logged_in'))
