@@ -380,6 +380,7 @@ class BookingMeetingRoomController extends Controller
             return redirect('/')->with('message', 'Booking Successfully.');
         } catch (\Exception $e) {
             DB::rollback();
+            session()->flush();
             return redirect('/')->with('message', 'Please try again!!');
         }
     }
