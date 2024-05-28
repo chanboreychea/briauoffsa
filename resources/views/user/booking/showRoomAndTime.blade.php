@@ -35,21 +35,21 @@
     <div class="row mb-3">
         <div class="card w-100 p-0">
             <h6 class="card-header bg-info text-light">
-                ជ្រើសរើសបន្ទប់ និង ម៉ោង
+                សូមជ្រើសរើសប្រភេទបន្ទប់ និងម៉ោងប្រជុំ
             </h6>
             <div class="card-body bg-light">
                 <div class="container-fluid" id="myGroup">
                     <div class="row">
                         <div class="col-lg-6">
-                            <button id="room1" style="font-family: khmer mef1,arial;" class="btn btn-primary w-100"
+                            <button id="room1" style="font-family: khmer mef2;" class="btn btn-primary rounded w-100"
                                 data-toggle="collapse" value="A" href="#collapseExample" role="button"
-                                aria-expanded="false" aria-controls="collapseExample">បន្ទប់ A
+                                aria-expanded="false" aria-controls="collapseExample">បន្ទប់ប្រជុំធំ A
                             </button>
                         </div>
                         <div class="col-lg-6">
-                            <button id="room2" style="font-family: khmer mef1,arial;" class="btn btn-primary w-100"
+                            <button id="room2" style="font-family: khmer mef2;" class="btn btn-primary rounded w-100"
                                 data-toggle="collapse" value="B" data-target="#collapseExample2" aria-expanded="false"
-                                aria-controls="collapseExample2">បន្ទប់ B
+                                aria-controls="collapseExample2">បន្ទប់ប្រជុំតូច B
                             </button>
                         </div>
                     </div>
@@ -62,9 +62,8 @@
                                             @for ($i = 8; $i < 12; $i++)
                                                 <div class="col nowrap">
                                                     <button type="button" value="A {{ $i }}-{{ $i + 1 }}"
-                                                        data-value="A {{ $i }}-{{ $i + 1 }}"
-                                                        class="items btn btn-sm btn-secondary w-100 times mt-2">
-                                                        {{ $i }}-{{ $i + 1 }}
+                                                        class="items btn btn-sm btn-secondary rounded w-100 times mt-2">
+                                                        {{ $i }}-{{ $i + 1 }} AM
                                                     </button>
                                                 </div>
                                             @endfor
@@ -74,9 +73,8 @@
                                             @for ($i = 1; $i < 5; $i++)
                                                 <div class="col nowrap">
                                                     <button type="button" value="A {{ $i }}-{{ $i + 1 }}"
-                                                        data-value="A {{ $i }}-{{ $i + 1 }}"
-                                                        class="items btn btn-sm btn-secondary w-100 times mt-2">
-                                                        {{ $i }}-{{ $i + 1 }}
+                                                        class="items btn btn-sm btn-secondary rounded w-100 times mt-2">
+                                                        {{ $i }}-{{ $i + 1 }} PM
                                                     </button>
                                                 </div>
                                             @endfor
@@ -94,9 +92,8 @@
                                                 <div class="col nowrap">
                                                     <button type="button"
                                                         value="B {{ $i }}-{{ $i + 1 }}"
-                                                        data-value="B {{ $i }}-{{ $i + 1 }}"
-                                                        class="items btn btn-sm btn-secondary w-100 times mt-2">
-                                                        {{ $i }}-{{ $i + 1 }}
+                                                        class="items btn btn-sm btn-secondary rounded w-100 times mt-2">
+                                                        {{ $i }}-{{ $i + 1 }} AM
                                                     </button>
                                                 </div>
                                             @endfor
@@ -106,9 +103,9 @@
                                                 <div class="col nowrap">
                                                     <button type="button"
                                                         value="B {{ $i }}-{{ $i + 1 }}"
-                                                        data-value="B {{ $i }}-{{ $i + 1 }}"
-                                                        class="items btn btn-sm btn-secondary w-100 times mt-2">
-                                                        {{ $i }}-{{ $i + 1 }}
+                                                        {{-- data-value="B {{ $i }}-{{ $i + 1 }}" --}}
+                                                        class="items btn btn-sm btn-secondary rounded w-100 times mt-2">
+                                                        {{ $i }}-{{ $i + 1 }} PM
                                                     </button>
                                                 </div>
                                             @endfor
@@ -119,37 +116,11 @@
 
                         </div>
                     </div>
-                    {{-- <div class="row mt-2">
-                            <table class="table table-sm table-bordered fontKef1">
-                                <thead style="font-size:12px">
-                                    <th class="text-center">ល.រ</th>
-                                    <th class="text-center">ប្រធានបទ</th>
-                                    <th class="text-center">ដឹកនាំដោយ</th>
-                                    <th class="text-center">កម្រិតប្រជុំ</th>
-                                    <th class="text-center">បន្ទប់</th>
-                                    <th class="text-center">ម៉ោង</th>
-                                    <th class="text-center">ឈ្មោះអ្នកកក់</th>
-                                </thead>
-                                <tbody style="font-size:12px">
-                                    @foreach ($booking as $key => $item)
-                                        <tr>
-                                            <td class="text-center">{{ $key + 1 }}</td>
-                                            <td class="text-center">{{ $item->topicOfMeeting }}</td>
-                                            <td class="text-center">{{ $item->directedBy }}</td>
-                                            <td class="text-center">{{ $item->meetingLevel }}</td>
-                                            <td class="text-center">{{ $item->room }}</td>
-                                            <td class="text-center">{{ $item->time }}</td>
-                                            <td class="text-center">{{ $item->lastNameKh }}
-                                                {{ $item->firstNameKh }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div> --}}
                 </div>
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="card p-0">
             <h6 class="card-header bg-danger text-light">ព័ត៌មានលម្អិត</h6>
@@ -187,59 +158,105 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="topic">ប្រធានបទ:</label>
-                                <input type="text" class="form-control" value="{{ old('topic') }}" name="topic"
-                                    id="topic" placeholder="ប្រធានបទ">
-                                @error('topic')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-3">
-                                <label for="directedBy">ដឹកនាំដោយ:</label>
-
-                                <select class="form-control" name="directedBy" value="{{ old('derectedBy') }}"
-                                    id="directedBy">
-                                    <option value="">-- ជ្រើសរើស --</option>
-                                    <option value="ប្រធានអង្គភាព">
-                                        ប្រធានអង្គភាព
-                                    </option>
-                                    <option value="អនុប្រធានអង្គភាព">អនុប្រធានអង្គភាព</option>
-                                    @foreach ($departments as $key => $offices)
-                                        <option value="ប្រធាននាយកដ្ឋាន{{ $key }}">
-                                            ប្រធាននាយកដ្ឋាន
-                                            {{ $key }}</option>
-                                        <option value="អនុប្រធាននាយកដ្ឋាន{{ $key }}">
-                                            អនុប្រធាននាយកដ្ឋាន
-                                            {{ $key }}</option>
-                                        @foreach ($offices as $key => $item)
-                                            <option value="ប្រធានការិយាល័យ{{ $item }}">ប្រធានការិយាល័យ
-                                                {{ $item }}</option>
-
-                                            <option value="អនុប្រធានការិយាល័យ{{ $item }}">អនុប្រធានការិយាល័យ
-                                                {{ $item }}</option>
+                        @if (Session::get('meetingLevel') == 9)
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="topic">ប្រធានបទ:</label>
+                                    <input type="text" class="form-control" value="{{ old('topic') }}"
+                                        name="topic" id="topic" placeholder="ប្រធានបទ">
+                                    @error('topic')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="regulator">និយ័តករ:</label>
+                                    <select class="form-control" name="regulator" value="{{ old('regulator') }}"
+                                        id="regulator">
+                                        <option value="">-- ជ្រើសរើស --</option>
+                                        @foreach ($regulator as $key => $item)
+                                            <option value="{{ $key }}">{{ $item }}</option>
                                         @endforeach
-                                    @endforeach
-                                    <option value="ផ្សេងៗ">
-                                        ផ្សេងៗ
-                                    </option>
-                                </select>
+                                    </select>
 
-                                @error('directedBy')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                @enderror
+                                    @error('regulator')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
 
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="directedBy">តួនាទី:</label>
+                                    <input type="text" class="form-control" value="{{ old('directedBy') }}"
+                                        name="directedBy" id="directedBy" placeholder="សូមបំពេញ">
+                                    @error('directedBy')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="nameDirectedBy">ដឹកនាំដោយ:</label>
+                                    <input type="text" class="form-control" value="{{ old('nameDirectedBy') }}"
+                                        name="nameDirectedBy" id="nameDirectedBy" placeholder="ឈ្មោះ">
+                                    @error('nameDirectedBy')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="nameDirectedBy">ឈ្មោះ:</label>
-                                <input type="text" class="form-control" value="{{ old('nameDirectedBy') }}" name="nameDirectedBy" id="nameDirectedBy"
-                                    placeholder="ឈ្មោះ">
-                                @error('nameDirectedBy')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                @enderror
+                        @else
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="topic">ប្រធានបទ:</label>
+                                    <input type="text" class="form-control" value="{{ old('topic') }}"
+                                        name="topic" id="topic" placeholder="ប្រធានបទ">
+                                    @error('topic')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="directedBy">តួនាទី:</label>
+
+                                    <select class="form-control" name="directedBy" value="{{ old('derectedBy') }}"
+                                        id="directedBy">
+                                        <option value="">-- ជ្រើសរើស --</option>
+                                        <option value="ប្រធានអង្គភាព">
+                                            ប្រធានអង្គភាព
+                                        </option>
+                                        <option value="អនុប្រធានអង្គភាព">អនុប្រធានអង្គភាព</option>
+                                        @foreach ($departments as $key => $offices)
+                                            <option value="ប្រធាននាយកដ្ឋាន{{ $key }}">
+                                                ប្រធាននាយកដ្ឋាន
+                                                {{ $key }}</option>
+                                            <option value="អនុប្រធាននាយកដ្ឋាន{{ $key }}">
+                                                អនុប្រធាននាយកដ្ឋាន
+                                                {{ $key }}</option>
+                                            @foreach ($offices as $key => $item)
+                                                <option value="ប្រធានការិយាល័យ{{ $item }}">ប្រធានការិយាល័យ
+                                                    {{ $item }}</option>
+
+                                                <option value="អនុប្រធានការិយាល័យ{{ $item }}">អនុប្រធានការិយាល័យ
+                                                    {{ $item }}</option>
+                                            @endforeach
+                                        @endforeach
+                                        <option value="ផ្សេងៗ">
+                                            ផ្សេងៗ
+                                        </option>
+                                    </select>
+
+                                    @error('directedBy')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="nameDirectedBy">ដឹកនាំដោយ:</label>
+                                    <input type="text" class="form-control" value="{{ old('nameDirectedBy') }}"
+                                        name="nameDirectedBy" id="nameDirectedBy" placeholder="ឈ្មោះ">
+                                    @error('nameDirectedBy')
+                                        <small class="form-text text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
+                        @endif
+
                         <div class="row">
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="member" class="col-form-label">ចំនួនសមាជិក:</label>
@@ -282,8 +299,9 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted d-flex justify-content-between">
-                    <a href="/calendar" class="btn btn-secondary" style="font-family: khmer mef1,arial;">បោះបង់</a>
-                    <input type="submit" class="btn btn-success" style="font-family: khmer mef1,arial;"
+                    <a href="/calendar" class="btn btn-secondary rounded"
+                        style="font-family: khmer mef1,arial;">បោះបង់</a>
+                    <input type="submit" class="btn btn-success rounded" style="font-family: khmer mef1,arial;"
                         value="ធ្វើការកក់">
                 </div>
             </form>

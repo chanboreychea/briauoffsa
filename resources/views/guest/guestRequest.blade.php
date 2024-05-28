@@ -37,18 +37,19 @@
     <div class="card">
         <div class="card-header bg-success">
             <div class="">
-                <h5 class="text-light">ការចុះឈ្មោះសំរាប់ធ្វើការកក់បន្ទប់ប្រជុំ</h5>
+                <h5 class="text-light">ទម្រង់ព័ត៌មានរបស់អ្នកស្នើសុំកក់បន្ទប់ប្រជុំ</h5>
             </div>
         </div>
-        <div class="card-body">
-            <form action="/guests/request" method="GET">
-                @csrf
+        <form action="/guests/request" method="GET">
+            @csrf
+            <div class="card-body">
+
                 <div class="row">
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
-                            <label class="form-label" for="exampleFormControlInput1">ជាអក្សរឡាតាំង</label>
+                            <label class="form-label" for="exampleFormControlInput1">ឈ្មោះអ្នកស្នើសុំ</label>
                             <input type="text" name="name" value="{{ old('name') }}" class="form-control"
-                                placeholder="ជាអក្សរឡាតាំង" aria-describedby="nameHelp">
+                                placeholder="សូមបំពេញឈ្មោះ" aria-describedby="nameHelp">
                             @error('name')
                                 <small id="nameHelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
@@ -56,9 +57,9 @@
                     </div>
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
-                            <label class="form-label" for="exampleFormControlInput1">តួរនាទី</label>
+                            <label class="form-label" for="exampleFormControlInput1">តួនាទី</label>
                             <input type="text" name="position" value="{{ old('position') }}" class="form-control"
-                                placeholder="តួរនាទី" aria-describedby="nameHelp">
+                                placeholder="តួនាទី" aria-describedby="nameHelp">
                             @error('position')
                                 <small id="nameHelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
@@ -68,7 +69,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
-                            <label class="form-label" for="meetingLevel">កិច្ចប្រជុំ</label>
+                            <label class="form-label" for="meetingLevel">ប្រភេទកិច្ចប្រជុំ</label>
                             <select class="form-control" name="meetingLevel" value="" id="meetingLevel">
                                 <option value="">-- ជ្រើសរើស --</option>
                                 @foreach ($meetingLevel as $key => $item)
@@ -106,14 +107,14 @@
                         <div id="interOfficeOrDepartmental"></div>
                     </div>
                 </div>
-                <div class="card-footer mt-2">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a class="btn btn-dark m-2" href="/">ថយក្រោយ</a>
-                        <input type="submit" class="btn btn-primary" value="បន្ត">
-                    </div>
+            </div>
+            <div class="card-footer mt-2">
+                <div class="d-flex justify-content-between align-items-center">
+                    <a class="btn btn-dark m-2 rounded" href="/">បោះបង់</a>
+                    <input type="submit" class="btn btn-primary rounded" value="បន្ទាប់">
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
     <script>
         var departmentAndOffice = @json($departments);

@@ -36,7 +36,7 @@
     <div class="block-signin">
         <!-- <a class="text-link-bd-btom hover-up" href="page-register.html">Register</a> -->
 
-        <a class="btn btn-default" href="/guests">ស្នើរសុំកក់បន្ទប់ប្រជុំ</a>
+        <a class="btn btn-default" href="/guests">ស្នើសុំកក់បន្ទប់ប្រជុំ</a>
 
     </div>
 @endsection
@@ -50,16 +50,16 @@
 
     <div class="row table-responsive mt-5">
         <table class="table table-bordered">
-            <thead class="thead-light">
-                <th class="text-center">ល.រ</th>
+            <thead class="thead-primary">
+                <th class="text-center bg-priamry">ល.រ</th>
                 <th class="text-center">កាលបរិច្ឆេទ</th>
                 <th class="text-center">ប្រធានបទ</th>
+                <th class="text-center">តួនាទី</th>
                 <th class="text-center">ដឹកនាំដោយ</th>
-                <th class="text-center">ឈ្មោះអ្នកដឹកនាំ</th>
-                <th class="text-center">កម្រិតប្រជុំ</th>
-                <th class="text-center">ម៉ោង</th>
-                <th class="text-center">ឈ្មោះអ្នកកក់</th>
-                <th class="text-center">ការស្នើរ</th>
+                <th class="text-center">ប្រភេទកិច្ចប្រជុំ</th>
+                <th class="text-center">បន្ទប់/ម៉ោង</th>
+                <th class="text-center">ឈ្មោះអ្នកស្នើសុំ</th>
+                <th class="text-center">ស្ថានភាព</th>
             </thead>
             <tbody>
                 @foreach ($booking as $key => $item)
@@ -74,13 +74,32 @@
                         <td class="">{{ $item->directedBy }}</td>
                         <td class="">{{ $item->nameDirectedBy }}</td>
                         <td class="">
-                            <div data-toggle="tooltip" data-html="true" title="{{ $item->interOfficeOrDepartmental }}">
-                                @foreach ($meetingLevel as $key => $value)
-                                    @if ($item->meetingLevel == $key)
-                                        {{ $value }}
-                                    @endif
-                                @endforeach
-                            </div>
+
+                            @if ($item->meetingLevel == 9)
+                                @php
+                                    $regulatorName = '';
+                                    foreach ($regulator as $key => $value) {
+                                        if ($item->regulator == $key) {
+                                            $regulatorName = $value;
+                                        }
+                                    }
+                                @endphp
+                                <div data-toggle="tooltip" data-html="true" title="{{ $regulatorName }}">
+                                    @foreach ($meetingLevel as $key => $value)
+                                        @if ($item->meetingLevel == $key)
+                                            {{ $value }}
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @else
+                                <div data-toggle="tooltip" data-html="true" title="{{ $item->interOfficeOrDepartmental }}">
+                                    @foreach ($meetingLevel as $key => $value)
+                                        @if ($item->meetingLevel == $key)
+                                            {{ $value }}
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endif
                         </td>
                         <td class="">
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->room }}">

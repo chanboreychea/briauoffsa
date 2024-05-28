@@ -7,6 +7,7 @@ use App\Enum\Status;
 use App\Models\Guest;
 use App\Enum\Department;
 use App\Enum\MeetingLevel;
+use App\enum\Regulator;
 use Illuminate\Http\Request;
 use App\Models\BookingMeetingRoom;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,7 @@ class BookingMeetingRoomController extends Controller
         }
 
         $meetingLevel = MeetingLevel::MEETING_LEVEL;
+        $regulator = Regulator::REGULATOR;
 
         $booking = DB::table('booking_meeting_rooms')
             ->join('guests', 'guests.bookingId', '=', 'booking_meeting_rooms.id')
@@ -38,6 +40,7 @@ class BookingMeetingRoomController extends Controller
                 'directedBy',
                 'nameDirectedBy',
                 'meetingLevel',
+                'regulator',
                 'interOfficeOrDepartmental',
                 'member',
                 'description',
@@ -46,7 +49,7 @@ class BookingMeetingRoomController extends Controller
                 'isApprove'
             )->paginate(10);
 
-        return view('user.booking.showBookingMeetingRooms', compact('booking', 'meetingLevel'));
+        return view('user.booking.showBookingMeetingRooms', compact('booking', 'meetingLevel', 'regulator'));
     }
 
     public function index(Request $request)
@@ -55,6 +58,7 @@ class BookingMeetingRoomController extends Controller
         $toDate = $request->input('toDate');
         $room = $request->input('room');
         $directedBy = $request->input('directedBy');
+        $meeting = $request->input('meetingLevel');
 
         $query = DB::table('booking_meeting_rooms')
             ->join('guests', 'guests.bookingId', '=', 'booking_meeting_rooms.id')
@@ -67,6 +71,7 @@ class BookingMeetingRoomController extends Controller
                 'directedBy',
                 'nameDirectedBy',
                 'meetingLevel',
+                'regulator',
                 'interOfficeOrDepartmental',
                 'member',
                 'room',
@@ -75,9 +80,7 @@ class BookingMeetingRoomController extends Controller
                 'isApprove'
             );
 
-
         $approve = clone $query;
-        $pending = clone $query;
 
         if ($fromDate && $toDate) {
             $approve->whereBetween('date', [Carbon::parse($fromDate)->format('Y-m-d'), Carbon::parse($toDate)->format('Y-m-d')]);
@@ -93,7 +96,11 @@ class BookingMeetingRoomController extends Controller
             $approve->where('directedBy', $directedBy);
         }
 
-        $isApproveBooking = $approve->orderByDesc('date')->get(); //->where('isApprove', '!=', Status::PENDING)
+        if ($meeting) {
+            $approve->where('meetingLevel', $meeting);
+        }
+
+        $isApproveBooking = $approve->orderByDesc('date')->paginate(10); //->where('isApprove', '!=', Status::PENDING)
 
         //$booking = $pending->where('date', '>=', Carbon::now()->format('Y-m-d'))->where('isApprove', Status::PENDING)->orderByDesc('date')->get();
 
@@ -101,7 +108,7 @@ class BookingMeetingRoomController extends Controller
 
         $meetingLevel = MeetingLevel::MEETING_LEVEL;
 
-        return view('admin.booking.index', compact( 'isApproveBooking', 'departments', 'meetingLevel'));
+        return view('admin.booking.index', compact('isApproveBooking', 'departments', 'meetingLevel'));
     }
 
     public function exportBookingMeetingRoom(Request $request)
@@ -116,6 +123,7 @@ class BookingMeetingRoomController extends Controller
             $toDate = $queryParams['toDate'];
             $room = $queryParams['room'];
             $directedBy = $queryParams['directedBy'];
+            $meeting = $queryParams['meetingLevel'];
             if ($fromDate == "") {
                 $fromDate = Carbon::parse($defaultDate[0])->format('Y-m-d');
             }
@@ -155,6 +163,10 @@ class BookingMeetingRoomController extends Controller
 
         if (isset($directedBy) && $directedBy != null) {
             $query->where('directedBy', $directedBy);
+        }
+
+        if (isset($meeting) && $meeting != null) {
+            $query->where('meetingLevel', $meeting);
         }
 
         $booking = $query->where('isApprove', '=', Status::APPROVE)->orderByDesc('date')->get();
@@ -266,6 +278,8 @@ class BookingMeetingRoomController extends Controller
     public function showRoomAndTime(Request $request, string $day, int $month)
     {
         $departments = Department::DEPARTMENTS;
+        $regulator = Regulator::REGULATOR;
+
         $now = Carbon::now()->format('Y');
         $now = Carbon::parse($now . '-' . $month . '-' . $day);
         $day = $this->getDayKhmer($now->format('D'));
@@ -294,12 +308,13 @@ class BookingMeetingRoomController extends Controller
                 'time',
             )->get();
 
-        return view('user.booking.showRoomAndTime', compact('departments', 'verifyTimesBooking', 'booking', 'now', 'date', 'day'));
+        return view('user.booking.showRoomAndTime', compact('departments', 'verifyTimesBooking', 'booking', 'now', 'date', 'day', 'regulator'));
     }
 
     public function bookingRoom(Request $request)
     {
-        $request->validate([
+
+        $rules = [
             'topic' => 'bail|required|max:100',
             'directedBy' => 'bail|required|max:100',
             'nameDirectedBy' => 'bail|required|max:100',
@@ -307,10 +322,12 @@ class BookingMeetingRoomController extends Controller
             'description' => 'max:255',
             'room' => 'required',
             'times' => 'required',
-        ], [
+        ];
+
+        $rulesResponse = [
             'topic.required' => 'សូមបញ្ចូលនូវឈ្មោះប្រធានបទ',
             'topic.max' => 'អក្សរអនុញ្ញាតត្រឹម​ ១០០​ តួរ',
-            'directedBy.required' => 'សូមជ្រើសរើសនូវអ្នកដឹកនាំ',
+            'directedBy.required' => 'សូមជ្រើសរើសនូវតួនាទី',
             'directedBy.max' => 'អក្សរអនុញ្ញាតត្រឹម​ ១០០​ តួរ',
             'nameDirectedBy.required' => 'សូមជ្រើសរើសនូវឈ្មោះអ្នកដឹកនាំ',
             'member.required' => 'សូមបញ្ចូលនូវចំនួនសមាជិក',
@@ -319,7 +336,14 @@ class BookingMeetingRoomController extends Controller
             'description.max' => 'អក្សរអនុញ្ញាតត្រឹម​ ២៥៥​ តួរ',
             'room.required' => 'សូមជ្រើសរើសបន្ទប់',
             'times.required' => 'សូមជ្រើសរើសម៉ោង',
-        ]);
+        ];
+
+        if (session('meetingLevel') == 9) {
+            $rules['regulator'] = 'bail|required|max:100';
+            $rulesResponse['regulator.required'] = 'សូមជ្រើសរើសនូវនិយ័តករ';
+        }
+
+        $request->validate($rules, $rulesResponse);
 
         $topic = $request->input('topic');
         $directedBy = $request->input('directedBy');
@@ -336,6 +360,7 @@ class BookingMeetingRoomController extends Controller
         $email = session('email');
         $meetingLevel = session('meetingLevel');
         $interOfficeOrDepartmentalArray = session('interOfficeOrDepartmental');
+        $regulator = $request->input('regulator') ? $request->input('regulator') : null;
         // if ($interOfficeOrDepartmentalArray) $interOfficeOrDepartmental = implode(', ', $interOfficeOrDepartmentalArray);
         // else $interOfficeOrDepartmental = null;
         $interOfficeOrDepartmental = $interOfficeOrDepartmentalArray ? implode(', ', $interOfficeOrDepartmentalArray) : null;
@@ -348,6 +373,7 @@ class BookingMeetingRoomController extends Controller
                 'directedBy' => $directedBy,
                 'nameDirectedBy' => $nameDirectedBy,
                 'meetingLevel' => $meetingLevel,
+                'regulator' => $regulator,
                 'interOfficeOrDepartmental' => $interOfficeOrDepartmental,
                 'member' => $member,
                 'room' => $room,
@@ -377,11 +403,11 @@ class BookingMeetingRoomController extends Controller
 
             DB::commit();
             session()->flush();
-            return redirect('/')->with('message', 'Booking Successfully.');
+            return redirect('/')->with('message', 'ការស្នើសុំកក់បន្ទប់ប្រជុំទទួលបានជោគជ័យ សូមអរគុណ។');
         } catch (\Exception $e) {
             DB::rollback();
             session()->flush();
-            return redirect('/')->with('message', 'Please try again!!');
+            return redirect('/')->with('message', 'សូមព្យាយាមម្តងទៀត។');
         }
     }
 

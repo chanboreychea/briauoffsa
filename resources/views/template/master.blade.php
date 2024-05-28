@@ -164,7 +164,7 @@
     </div>
     <main class="main" style="min-height: 75vh; height:auto">
 
-        <section class="section-box mt-130 mb-100">
+        <section class="section-box mt-100 mb-100">
             <div class="container">
 
                 @yield('contents')
