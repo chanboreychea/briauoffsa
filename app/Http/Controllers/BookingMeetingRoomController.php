@@ -7,7 +7,7 @@ use App\Enum\Status;
 use App\Models\Guest;
 use App\Enum\Department;
 use App\Enum\MeetingLevel;
-use App\enum\Regulator;
+use App\Enum\Regulator;
 use Illuminate\Http\Request;
 use App\Models\BookingMeetingRoom;
 use Illuminate\Support\Facades\DB;

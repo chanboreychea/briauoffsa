@@ -1,8 +1,8 @@
 <?php
 
-namespace App\enum;
+namespace App\Enum;
 
-enum Regulator
+class Regulator
 {
     const REGULATOR = array(
         1 => 'និយ័តករសន្តិសុខសង្គម',
