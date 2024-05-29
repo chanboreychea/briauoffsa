@@ -550,7 +550,8 @@
                             </div>
                             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                 data-target="#deleteRecord{{ $item->id }}">
-                                <i class='bx bx-trash'></i>
+                                {{-- <i class='bx bx-trash'></i> --}}
+                                <i class='bx bx-show'></i>
                             </button>
                             <div class="modal fade" id="deleteRecord{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

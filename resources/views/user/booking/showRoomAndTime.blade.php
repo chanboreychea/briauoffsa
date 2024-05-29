@@ -274,28 +274,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- meeting Level --}}
-                        <div class="row">
-                            {{-- <div class="form-group col-md-6 col-sm-12">
-                                <label for="meetingLevel" class="col-form-label">កម្រិតប្រជុំ:</label>
-                                <select class="form-control" name="meetingLevel" id="meetingLevel">
-                                    <option value="">-- ជ្រើសរើស --</option>
-                                    <option value="ការិយាល័យ">ការិយាល័យ</option>
-                                    <option value="អន្តរការិយាល័យ">អន្តរការិយាល័យ</option>
-                                    <option value="នាយកដ្ឋាន">នាយកដ្ឋាន</option>
-                                    <option value="អន្តរនាយកដ្ឋាន">អន្តរនាយកដ្ឋាន</option>
-                                    <option value="អង្គភាព">អង្គភាព</option>
-                                    <option value="ផ្សេងៗ">ផ្សេងៗ</option>
-                                </select>
-                                @error('meetingLevel')
-                                    <small class="form-text text-danger">{{ $message }}</small>
-                                @enderror
-                            </div> --}}
-                            <div class="col">
-                                <div id="interOfficeOrDepartmental"></div>
-                            </div>
 
-                        </div>
                     </div>
                 </div>
                 <div class="card-footer text-muted d-flex justify-content-between">
@@ -375,6 +354,7 @@
                     }
                 });
             }
+
             times[i].addEventListener('click', function(event) {
                 const value = event.target.value;
                 var index = timeArray.indexOf(value);
@@ -383,73 +363,26 @@
                 } else {
                     timeArray.push(value);
                 }
+
+                timeArray.sort((a, b) => {
+                    // Extract the numbers from the strings
+                    const extractNumber = (str) => {
+                        const match = str.match(/\d+/); // Extract the first number
+                        return match ? parseInt(match[0], 10) : 0;
+                    };
+
+                    // Compare the extracted numbers
+                    const numA = extractNumber(a);
+                    const numB = extractNumber(b);
+
+                    return numA - numB;
+                });
+
                 document.getElementById("timeDiv").innerHTML = timeArray.join(', ');
                 document.getElementById("timeInput").value = timeArray.join(', ');
                 times[i].classList.toggle("btn-success");
             });
         }
-
-
-        function getSelectedMeetingLevelValue() {
-            const selectElement = document.getElementById('meetingLevel');
-            const selectedValue = selectElement.value;
-            if (selectedValue == "អន្តរនាយកដ្ឋាន") {
-                removeInput('offices');
-                createInput("នាយកដ្ឋាន", "departments");
-
-            } else if (selectedValue == "អន្តរការិយាល័យ") {
-                removeInput('departments');
-                createInput("ការិយាល័យ", "offices");
-
-            } else if (selectedValue == "ការិយាល័យ" || selectedValue == "នាយកដ្ឋាន") {
-                removeInput('offices');
-                removeInput('departments');
-            }
-
-        }
-
-        function createInput(name, meetingLevel) {
-            const newLabel = document.createElement('label');
-            newLabel.textContent = `ឈ្មោះ${name}:`;
-            newLabel.className = `col-form-label ${meetingLevel}`;
-
-            const selectElement = document.createElement('select');
-            selectElement.name = 'interOfficeOrDepartmental[]';
-            // selectElement.id = 'mySelectID';
-            selectElement.className = `form-control ${meetingLevel}`;
-
-            if (meetingLevel == "departments") {
-                for (const key in departmentAndOffice) {
-                    const optionElement = document.createElement('option');
-                    optionElement.value = key;
-                    optionElement.textContent = key;
-                    selectElement.appendChild(optionElement);
-                }
-            } else {
-                for (const key in departmentAndOffice) {
-                    for (const office in departmentAndOffice[key]) {
-                        const optionElement = document.createElement('option');
-                        optionElement.value = departmentAndOffice[key][office];
-                        optionElement.textContent = departmentAndOffice[key][office];
-                        selectElement.appendChild(optionElement);
-                    }
-                }
-            }
-
-
-            const parentElement = document.getElementById('interOfficeOrDepartmental');
-            parentElement.appendChild(newLabel);
-            parentElement.appendChild(selectElement);
-        }
-
-        function removeInput(name) {
-            const container = document.querySelector('#interOfficeOrDepartmental');
-            const childrenToRemove = container.querySelectorAll(`.${name}`);
-            childrenToRemove.forEach(child => {
-                container.removeChild(child);
-            });
-        }
-
-        document.getElementById('meetingLevel').addEventListener('change', getSelectedMeetingLevelValue);
     </script>
+
 @endsection
