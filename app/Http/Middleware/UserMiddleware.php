@@ -16,7 +16,7 @@ class UserMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->session()->has('is_user_logged_in') == false) {
-            return redirect()->route('user-login');
+            return redirect()->route('homepage');
         }
         return $next($request);
     }
