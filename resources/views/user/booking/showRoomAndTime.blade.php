@@ -126,9 +126,9 @@
                             <div class="modal-body d-flex-justify-content-center align-items-center"
                                 style="height: 400px;display:flex;justify-content: center;align-items: center;flex-direction: column">
 
-                                <h3>សូមជ្រើសរើសម៉ោងតាមលំដាប់​</h3>
+                                <h3 class="text-danger">សូមលោក-លោកស្រីជ្រើសរើស​</h3>
                                 <br>
-                                <h3>និងវេន(ព្រឹក ឬល្ងាច)ដូចគ្នា</h3>
+                                <h3 class="text-danger">ពេលវេលាឲ្យបានត្រឹមត្រូវ!!!</h3>
 
                             </div>
 
