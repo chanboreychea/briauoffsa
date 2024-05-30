@@ -32,6 +32,7 @@
 @endsection
 
 @section('contents')
+
     <div class="row mb-3">
         <div class="card w-100 p-0">
             <h6 class="card-header bg-info text-light">
@@ -112,6 +113,23 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-body d-flex-justify-content-center align-items-center"
+                                style="height: 400px;display:flex;justify-content: center;align-items: center;flex-direction: column">
+
+                                <h3>សូមជ្រើសរើសម៉ោងតាមលំដាប់​</h3>
+                                <br>
+                                <h3>និងវេន(ព្រឹក ឬល្ងាច)ដូចគ្នា</h3>
+
                             </div>
 
                         </div>
@@ -358,31 +376,74 @@
             times[i].addEventListener('click', function(event) {
                 const value = event.target.value;
                 var index = timeArray.indexOf(value);
+
                 if (index !== -1) {
-                    timeArray.splice(index, 1);
+                    timeArray.sort((a, b) => {
+                        // Compare the extracted numbers
+                        const numA = extractNumber(a);
+                        const numB = extractNumber(b);
+                        return numA - numB;
+                    });
+
+                    let fVinTimeArrays = extractNumber(timeArray[0]);
+                    let lVinTimeArrays = extractNumber(timeArray[timeArray.length - 1]);
+
+                    console.log(fVinTimeArrays);
+                    if (extractNumber(value) > fVinTimeArrays && extractNumber(value) < lVinTimeArrays) {
+
+                        $('#exampleModal').modal('show');
+
+                        times[i].classList.toggle("btn-success");
+                    } else
+                        timeArray.splice(index, 1);
                 } else {
-                    timeArray.push(value);
+
+                    if (timeArray.length === 0) {
+
+                        timeArray.push(value);
+                    } else {
+                        timeArray.sort((a, b) => {
+                            // Compare the extracted numbers
+                            const numA = extractNumber(a);
+                            const numB = extractNumber(b);
+                            return numA - numB;
+                        });
+
+                        let fVinTimeArrays = extractNumber(timeArray[0]);
+                        let lVinTimeArrays = extractNumber(timeArray[timeArray.length - 1]);
+
+                        console.log(fVinTimeArrays);
+                        if (extractNumber(value) < fVinTimeArrays - 1 || extractNumber(value) > lVinTimeArrays +
+                            1) {
+
+                            $('#exampleModal').modal('show');
+
+                            times[i].classList.toggle("btn-success");
+                        } else
+                            timeArray.push(value);
+                    }
                 }
 
                 timeArray.sort((a, b) => {
-                    // Extract the numbers from the strings
-                    const extractNumber = (str) => {
-                        const match = str.match(/\d+/); // Extract the first number
-                        return match ? parseInt(match[0], 10) : 0;
-                    };
-
                     // Compare the extracted numbers
                     const numA = extractNumber(a);
                     const numB = extractNumber(b);
-
                     return numA - numB;
                 });
 
                 document.getElementById("timeDiv").innerHTML = timeArray.join(', ');
                 document.getElementById("timeInput").value = timeArray.join(', ');
+
                 times[i].classList.toggle("btn-success");
             });
+
         }
+
+        // Extract the numbers from the strings
+        const extractNumber = (str) => {
+            const match = str.match(/\d+/); // Extract the first number
+            return match ? parseInt(match[0], 10) : 0;
+        };
     </script>
 
 @endsection
