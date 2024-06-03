@@ -61,6 +61,14 @@
         .showOfficeAndDepartment .show {
             display: block;
         }
+
+        .font-khmer2 {
+            font-family: khmer mef2;
+        }
+
+        .font-khmer1 {
+            font-family: khmer mef1;
+        }
     </style>
 </head>
 

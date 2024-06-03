@@ -153,24 +153,24 @@
 
                         <div class="form-group text-muted m-0">
                             <label for="inputEmail3">កាលបរិច្ឆេទ:</label>
-                            <h5 id="inputEmail3" class="text-success">
+                            <h5 id="inputEmail3" class="text-success font-khmer1">
                                 {{ $date }}</h5>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-lg-6 col-sm-12">
                                 <div class="form-group row text-muted">
-                                    <label for="roomDiv" class="col-form-label col-lg-3 ">បន្ទប់:</label>
+                                    <label for="roomDiv" class="col-form-label col-lg-3 font-khmer1">បន្ទប់:</label>
                                     <div class="col-lg-9 p-0">
-                                        <div id="roomDiv"></div>
+                                        <div class="font-khmer1" id="roomDiv"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-12">
                                 <div class="form-group row text-muted">
-                                    <label for="timeDiv" class="col-form-label col-lg-3 ">ម៉ោង:</label>
+                                    <label for="timeDiv" class="col-form-label col-lg-3 font-khmer1">ម៉ោង:</label>
                                     <div class="col-lg-9 p-0">
-                                        <div class="mb-0" id="timeDiv"></div>
+                                        <div class="mb-0 font-khmer1" id="timeDiv"></div>
                                     </div>
                                 </div>
                             </div>
@@ -179,17 +179,17 @@
                         @if (Session::get('meetingLevel') == 9)
                             <div class="row">
                                 <div class="form-group col-md-3">
-                                    <label for="topic">ប្រធានបទ:</label>
+                                    <label class="font-khmer1" for="topic">ប្រធានបទ:</label>
                                     <input type="text" class="form-control" value="{{ old('topic') }}"
                                         name="topic" id="topic" placeholder="ប្រធានបទ">
                                     @error('topic')
-                                        <small class="form-text text-danger">{{ $message }}</small>
+                                        <small class="form-text text-danger font-khmer1">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="regulator">និយ័តករ:</label>
-                                    <select class="form-control" name="regulator" value="{{ old('regulator') }}"
-                                        id="regulator">
+                                    <label class="font-khmer1" for="regulator">និយ័តករ:</label>
+                                    <select class="form-control font-khmer1" name="regulator"
+                                        value="{{ old('regulator') }}" id="regulator">
                                         <option value="">-- ជ្រើសរើស --</option>
                                         @foreach ($regulator as $key => $item)
                                             <option value="{{ $key }}">{{ $item }}</option>
@@ -197,43 +197,44 @@
                                     </select>
 
                                     @error('regulator')
-                                        <small class="form-text text-danger">{{ $message }}</small>
+                                        <small class="form-text text-danger font-khmer1">{{ $message }}</small>
                                     @enderror
 
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="directedBy">តួនាទី:</label>
-                                    <input type="text" class="form-control" value="{{ old('directedBy') }}"
-                                        name="directedBy" id="directedBy" placeholder="សូមបំពេញ">
+                                    <label class="font-khmer1" for="directedBy">តួនាទី:</label>
+                                    <input type="text" class="form-control font-khmer1"
+                                        value="{{ old('directedBy') }}" name="directedBy" id="directedBy"
+                                        placeholder="សូមបំពេញ">
                                     @error('directedBy')
-                                        <small class="form-text text-danger">{{ $message }}</small>
+                                        <small class="form-text text-danger font-khmer1">{{ $message }}</small>
                                     @enderror
 
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="nameDirectedBy">ដឹកនាំដោយ:</label>
-                                    <input type="text" class="form-control" value="{{ old('nameDirectedBy') }}"
-                                        name="nameDirectedBy" id="nameDirectedBy" placeholder="ឈ្មោះ">
+                                    <label class="font-khmer1" for="nameDirectedBy">ដឹកនាំដោយ:</label>
+                                    <input type="text" class="form-control font-khmer1"
+                                        value="{{ old('nameDirectedBy') }}" name="nameDirectedBy" id="nameDirectedBy"
+                                        placeholder="ឈ្មោះ">
                                     @error('nameDirectedBy')
-                                        <small class="form-text text-danger">{{ $message }}</small>
+                                        <small class="form-text text-danger font-khmer1">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                         @else
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="topic">ប្រធានបទ:</label>
-                                    <input type="text" class="form-control" value="{{ old('topic') }}"
+                                    <label class="font-khmer1" for="topic">ប្រធានបទ:</label>
+                                    <input type="text" class="form-control font-khmer1" value="{{ old('topic') }}"
                                         name="topic" id="topic" placeholder="ប្រធានបទ">
                                     @error('topic')
-                                        <small class="form-text text-danger">{{ $message }}</small>
+                                        <small class="form-text text-danger font-khmer1">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="directedBy">តួនាទី:</label>
-
-                                    <select class="form-control" name="directedBy" value="{{ old('derectedBy') }}"
-                                        id="directedBy">
+                                    <label class="font-khmer1" for="directedBy">តួនាទី:</label>
+                                    <select class="form-control font-khmer1" name="directedBy"
+                                        value="{{ old('derectedBy') }}" id="directedBy">
                                         <option value="">-- ជ្រើសរើស --</option>
                                         <option value="ប្រធានអង្គភាព">
                                             ប្រធានអង្គភាព
@@ -265,18 +266,19 @@
 
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="nameDirectedBy">ដឹកនាំដោយ:</label>
-                                    <input type="text" class="form-control" value="{{ old('nameDirectedBy') }}"
-                                        name="nameDirectedBy" id="nameDirectedBy" placeholder="ឈ្មោះ">
+                                    <label class="font-khmer1" for="nameDirectedBy">ដឹកនាំដោយ:</label>
+                                    <input type="text" class="form-control font-khmer1"
+                                        value="{{ old('nameDirectedBy') }}" name="nameDirectedBy" id="nameDirectedBy"
+                                        placeholder="ឈ្មោះ">
                                     @error('nameDirectedBy')
-                                        <small class="form-text text-danger">{{ $message }}</small>
+                                        <small class="form-text text-danger font-khmer1">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
                         @endif
 
                         <div class="row">
-                            <div class="form-group col-md-6 col-sm-12">
+                            <div class="form-group col-md-6 col-sm-12 font-khmer1">
                                 <label for="member" class="col-form-label">ចំនួនសមាជិក:</label>
                                 <input type="number" min="2" max="50" value="{{ old('member') }}"
                                     class="form-control w-100" name="member" id="member" placeholder="ចំនួន">
@@ -285,7 +287,7 @@
                                 @enderror
 
                             </div>
-                            <div class="form-group col-lg-6 col-sm-12">
+                            <div class="form-group col-lg-6 col-sm-12 font-khmer1">
                                 <label for="description" class="col-form-label">គោលបំណង:</label>
                                 <div>
                                     <textarea name="description" id="description" class="form-control" cols="30" rows="3"></textarea>
@@ -296,9 +298,9 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted d-flex justify-content-between">
-                    <a href="/calendar" class="btn btn-secondary rounded"
+                    <a href="/calendar" class="btn btn-secondary rounded font-khmer1"
                         style="font-family: khmer mef1,arial;">បោះបង់</a>
-                    <input type="submit" class="btn btn-success rounded" style="font-family: khmer mef1,arial;"
+                    <input type="submit" class="btn btn-success rounded font-khmer1"
                         value="ធ្វើការកក់">
                 </div>
             </form>
