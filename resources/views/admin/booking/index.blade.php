@@ -402,9 +402,6 @@
                                         {{ $item }}</option>
                                 @endforeach
                             @endforeach
-                            <option value="ផ្សេងៗ">
-                                ផ្សេងៗ
-                            </option>
                         </select>
                     </div>
                 </div>

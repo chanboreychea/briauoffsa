@@ -255,9 +255,6 @@
                                                     {{ $item }}</option>
                                             @endforeach
                                         @endforeach
-                                        <option value="ផ្សេងៗ">
-                                            ផ្សេងៗ
-                                        </option>
                                     </select>
 
                                     @error('directedBy')
@@ -300,8 +297,7 @@
                 <div class="card-footer text-muted d-flex justify-content-between">
                     <a href="/calendar" class="btn btn-secondary rounded font-khmer1"
                         style="font-family: khmer mef1,arial;">បោះបង់</a>
-                    <input type="submit" class="btn btn-success rounded font-khmer1"
-                        value="ធ្វើការកក់">
+                    <input type="submit" class="btn btn-success rounded font-khmer1" value="ធ្វើការកក់">
                 </div>
             </form>
         </div>
