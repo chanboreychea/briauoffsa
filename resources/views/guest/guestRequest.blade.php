@@ -40,16 +40,15 @@
                 <h5 class="text-light">ទម្រង់ព័ត៌មានរបស់អ្នកស្នើសុំកក់បន្ទប់ប្រជុំ</h5>
             </div>
         </div>
-        <form action="/guests/request" method="GET">
+        <form action="/guests/request" method="get">
             @csrf
             <div class="card-body">
-
                 <div class="row">
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label class="form-label" for="exampleFormControlInput1">ឈ្មោះអ្នកស្នើសុំ</label>
-                            <input type="text" name="name" value="{{ old('name') }}" class="form-control"
-                                placeholder="សូមបំពេញឈ្មោះ" aria-describedby="nameHelp">
+                            <input type="text" name="name" class="form-control" placeholder="សូមបំពេញឈ្មោះ"
+                                aria-describedby="nameHelp">
                             @error('name')
                                 <small id="nameHelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
@@ -58,8 +57,8 @@
                     <div class="col-lg-6 col-sm-12">
                         <div class="form-group">
                             <label class="form-label" for="exampleFormControlInput1">តួនាទី</label>
-                            <input type="text" name="position" value="{{ old('position') }}" class="form-control"
-                                placeholder="តួនាទី" aria-describedby="nameHelp">
+                            <input type="text" name="position" class="form-control" placeholder="តួនាទី"
+                                aria-describedby="nameHelp">
                             @error('position')
                                 <small id="nameHelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
@@ -84,8 +83,8 @@
                     <div class="col-lg-3 col-sm-12">
                         <div class="form-group">
                             <label class="form-label" for="exampleFormControlInput1">លេខទូរស័ព្ទ</label>
-                            <input type="text" name="phoneNumber" value="{{ old('phoneNumber') }}" class="form-control"
-                                id="exampleFormControlInput1" placeholder="លេខទូរស័ព្ទ" aria-describedby="passwordHelp">
+                            <input type="text" name="phoneNumber" class="form-control" id="exampleFormControlInput1"
+                                placeholder="លេខទូរស័ព្ទ" aria-describedby="passwordHelp">
                             @error('phoneNumber')
                                 <small id="passwordHelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
@@ -94,8 +93,8 @@
                     <div class="col-lg-3 col-sm-12">
                         <div class="form-group">
                             <label class="form-label" for="exampleFormControlInput1">អ៊ីម៉ែល</label>
-                            <input type="email" name="email" value="{{ old('email') }}" class="form-control"
-                                id="exampleFormControlInput1" placeholder="អ៊ីម៉ែល" aria-describedby="emailHelp">
+                            <input type="email" name="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="អ៊ីម៉ែល" aria-describedby="emailHelp">
                             @error('email')
                                 <small id="emailHelp" class="form-text text-danger">{{ $message }}</small>
                             @enderror
@@ -116,6 +115,7 @@
             </div>
         </form>
     </div>
+
     <script>
         var departmentAndOffice = @json($departments);
 
@@ -183,4 +183,5 @@
 
         document.getElementById('meetingLevel').addEventListener('change', getSelectedMeetingLevelValue);
     </script>
+
 @endsection

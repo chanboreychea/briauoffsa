@@ -21,7 +21,7 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/booking/{bookingId}', [BookingMeetingRoomController::class, 'adminDestroy']);
     Route::get('/booking/export/excel', [BookingMeetingRoomController::class, 'exportBookingMeetingRoom']);
 
-    Route::resource('/users', UserController::class);
+    // Route::resource('/users', UserController::class);
 });
 
 
@@ -41,4 +41,3 @@ Route::middleware(['user'])->group(function () {
 Route::get('/guests', [GuestController::class, 'index']);
 Route::get('/guests/request', [GuestController::class, 'getCode']);
 Route::get('/guests/login', [GuestController::class, 'loginWithGenerateCode']);
-

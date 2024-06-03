@@ -22,7 +22,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="{{ asset('assets/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
-    <title>កក់បន្ទប់ប្រជុំ</title>
+    <title>ប្រព័ន្ទកក់បន្ទប់ប្រជុំ</title>
     <style>
         .cardd {
             width: 30px;

@@ -19,6 +19,7 @@ class GuestController extends Controller
 
     public function getCode(Request $request)
     {
+        
         $request->validate([
             'name' => 'bail|required|max:100',
             'position' => 'bail|required|max:100',
@@ -30,6 +31,18 @@ class GuestController extends Controller
             ],
             'email' => 'bail|required|email|max:100',
             'meetingLevel' => 'bail|required|regex:/[1-9]{1}/',
+        ], [
+            'name.required' => 'សូមបញ្ចូលនូវឈ្មោះ',
+            'name.max' => 'សូមបញ្ចូលនូវឈ្មោះរបស់អ្នកមិនអោយលើស ១០០តួរ',
+            'position.required' => 'សូមបញ្ចូលនូវតួនាទី',
+            'position.max' => 'សូមបញ្ចូលនូវតួនាទីរបស់អ្នកមិនអោយលើស ១០០តួរ',
+            'phoneNumber.required' => 'សូមបញ្ចូលនូវលេខទូរស័ព្ទ',
+            'phoneNumber.regex' => 'សូមបញ្ចូលនូវលេខទូរស័ព្ទរបស់អ្នកឲ្យបានត្រឹមត្រូវ',
+            'email.required' => 'សូមបញ្ចូលនូវអ៊ីម៉ែលរបស់អ្នក',
+            'email.email' => 'សូមបញ្ចូលនូវអ៊ីម៉ែលរបស់អ្នកឲ្យបានត្រឹមត្រូវ',
+            'email.max' => 'សូមបញ្ចូលនូវអ៊ីម៉ែលរបស់អ្នកមិនអោយលើស ១០០តួរ',
+            'meetingLevel.required' => 'សូមជ្រើសរើសនូវប្រភេទកិច្ចប្រជុំ',
+            'meetingLevel.regex' => 'សូមជ្រើសរើសនូវប្រភេទកិច្ចប្រជុំរបស់អ្នកឲ្យបានត្រឹមត្រូវ',
         ]);
 
         session([
