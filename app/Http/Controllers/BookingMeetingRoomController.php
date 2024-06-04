@@ -29,7 +29,7 @@ class BookingMeetingRoomController extends Controller
 
         $booking = DB::table('booking_meeting_rooms')
             ->join('guests', 'guests.bookingId', '=', 'booking_meeting_rooms.id')
-            ->where('booking_meeting_rooms.date', '>=', Carbon::now()->format('Y-m-01'))
+            // ->where('booking_meeting_rooms.date', '>=', Carbon::now()->format('Y-m-01'))
             ->orderByDesc('date')
             ->select(
                 'guests.email',

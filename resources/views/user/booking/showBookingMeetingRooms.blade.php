@@ -42,7 +42,6 @@
 @endsection
 
 @section('contents')
-
     <div class="d-flex justify-content-center mb-20">
         <div class="text-primary" style="font-family: khmer mef2;font-size: 24px">ព័ត៌មានអំពីកិច្ចប្រជុំ
         </div>
@@ -122,10 +121,9 @@
         </table>
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
         @if ($booking->hasPages())
             <div class="d-flex justify-content-between aligh-items-center">
-                {{-- Previous Page Link --}}
                 @if ($booking->onFirstPage())
                     <button class="disabled btn btn-sm btn-light rounded-2 shadow-sm" aria-disabled="true"
                         aria-label="@lang('pagination.previous')">
@@ -138,8 +136,6 @@
                             Previous</a>
                     </button>
                 @endif
-
-                {{-- Next Page Link --}}
                 @if ($booking->hasMorePages())
                     <button class="btn btn-sm btn-light rounded-2 shadow-sm">
                         <a href="{{ $booking->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">Next
@@ -154,6 +150,9 @@
             </div>
         @endif
 
-    </div>
+    </div> --}}
 
+    <div class="d-flex justify-content-center align-items-center">
+        {{ $booking->appends(request()->query())->links('pagination::bootstrap-4') }}
+    </div>
 @endsection

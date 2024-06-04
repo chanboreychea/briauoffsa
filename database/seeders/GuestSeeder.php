@@ -16,7 +16,7 @@ class GuestSeeder extends Seeder
     {
         $booking = BookingMeetingRoom::all();
         foreach ($booking as $item) {
-            Guest::factory()->count(50)->create([
+            Guest::factory()->count(1)->create([
                 'bookingId' => $item->id
             ]);
         }
