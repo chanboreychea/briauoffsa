@@ -39,9 +39,9 @@ class BookingMeetingRoomFactory extends Factory
 
         return [
             'date' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
-            'topicOfMeeting' => $this->faker->name,
+            'topicOfMeeting' => $this->faker->jobTitle(),
             'directedBy' => $this->faker->randomElement($directedBy),
-            'nameDirectedBy' => Str::random(10),
+            'nameDirectedBy' => $this->faker->name,
             'meetingLevel' => $this->faker->randomElement([1, 2, 3, 4, 5, 6, 7, 8, 9]),
             'regulator' => $this->faker->randomElement([1, 2, 3, 4, 5, 6, null]),
             'interOfficeOrDepartmental' => $this->faker->randomElement($interOfficeOrDepartmental),

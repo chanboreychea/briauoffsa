@@ -67,6 +67,8 @@ class BookingMeetingRoomController extends Controller
                 'guests.name',
                 'guests.email',
                 'guests.phoneNumber',
+                'guests.position',
+                'guests.created_at',
                 'date',
                 'topicOfMeeting',
                 'directedBy',
@@ -86,7 +88,7 @@ class BookingMeetingRoomController extends Controller
         if ($fromDate && $toDate) {
             $approve->whereBetween('date', [Carbon::parse($fromDate)->format('Y-m-d'), Carbon::parse($toDate)->format('Y-m-d')]);
         } else {
-            $approve->where('date', '>=', Carbon::now()->format('Y-m-01'));
+            // $approve->where('date', '>=', Carbon::now()->format('Y-m-01'));
         }
 
         if ($room) {
@@ -208,7 +210,7 @@ class BookingMeetingRoomController extends Controller
 
         // $this->send($message);
 
-        return redirect()->back()->with('message', 'Update Successfully');
+        return redirect()->back()->with('message', 'ការធ្វើបច្ចុប្បន្នភាពទទួលបានជោគជ័យ​ សូមអរគុណ។');
     }
 
     public function calendar(Request $request)

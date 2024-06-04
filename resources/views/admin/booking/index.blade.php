@@ -553,19 +553,53 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">
-                                                លុបការកក់បន្ទប់ប្រជុំ</h5>
+                                                ព័ត៌មានបន្ថែម</h5>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="text" value="{{ $item->email }}">
-                                            <input type="text" value="{{ $item->phoneNumber }}">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"
+                                                            for="phoneNumber">លេខទូរស័ព្ទ</label>
+                                                        <input type="text" id="phoneNumber"
+                                                            value="{{ $item->phoneNumber }}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"
+                                                            for="email">អ៊ីម៉ែល</label>
+                                                        <input type="email" name="email" value="{{ $item->email }}"
+                                                            class="form-control" id="email">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="position">តួនាទី</label>
+                                                        <input type="text" name="name" id="position"
+                                                            value="{{ $item->position }}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label"
+                                                            for="created_at">កាលបរិច្ឆេទស្នើសុំ</label>
+                                                        <input type="" name="email"
+                                                            value="{{ $item->created_at }}" class="form-control"
+                                                            id="created_at">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <form action="/booking/{{ $item->id }}" method="POST"
-                                                enctype="multipart/form-data">
+                                            <div class="font-khmer1 text-danger">ចុចយល់ព្រមដើម្បីលុប</div>
+                                            <form action="/booking/{{ $item->id }}" method="POST">
                                                 @csrf
-
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <input class="btn btn-primary rounded" type="submit" value="យល់ព្រម">
+                                                <input class="btn btn-danger btn-sm rounded" type="submit"
+                                                    value="យល់ព្រម">
                                             </form>
                                         </div>
                                     </div>
@@ -581,8 +615,6 @@
     <div class="d-flex justify-content-center align-items-center">
         {{ $isApproveBooking->appends(request()->query())->links('pagination::bootstrap-4') }}
     </div>
-
-
 
     <script>
         //message

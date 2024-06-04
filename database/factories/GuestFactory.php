@@ -23,7 +23,7 @@ class GuestFactory extends Factory
             'name' => $this->faker->name,
             'position' => Str::random(10),
             'email' => $this->faker->unique()->safeEmail,
-            'phoneNumber' => Str::random(10),
+            'phoneNumber' => $this->faker->unique()->phoneNumber(),
         ];
     }
 }
