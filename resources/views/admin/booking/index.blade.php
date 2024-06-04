@@ -509,20 +509,16 @@
                         <td class="text-center ">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                data-target="#exampleModal{{ $item->id }}">
+                                data-target="#edit{{ $item->id }}">
                                 <i class='bx bx-edit-alt'></i>
                             </button>
-                            <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="edit{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">
                                                 ការអនុញ្ញាត</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
                                         </div>
                                         <form action="/booking/approve/{{ $item->id }}" method="POST">
                                             @csrf
@@ -536,15 +532,16 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <input type="submit" name="reject" class="btn btn-danger"
+                                                <input type="submit" name="reject" class="btn btn-danger rounded"
                                                     value="បដិសេធ">
-                                                <input type="submit" name="approve" class="btn btn-primary"
+                                                <input type="submit" name="approve" class="btn btn-primary rounded"
                                                     value="អនុញ្ញាត">
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+
                             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                 data-target="#deleteRecord{{ $item->id }}">
                                 {{-- <i class='bx bx-trash'></i> --}}
@@ -557,17 +554,18 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">
                                                 លុបការកក់បន្ទប់ប្រជុំ</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="text" value="{{ $item->email }}">
+                                            <input type="text" value="{{ $item->phoneNumber }}">
                                         </div>
                                         <div class="modal-footer">
                                             <form action="/booking/{{ $item->id }}" method="POST"
                                                 enctype="multipart/form-data">
                                                 @csrf
+
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <input class="btn btn-primarយ btn-sm" type="submit" value="យល់ព្រម">
+                                                <input class="btn btn-primary rounded" type="submit" value="យល់ព្រម">
                                             </form>
                                         </div>
                                     </div>
@@ -578,8 +576,13 @@
                 @endforeach
             </tbody>
         </table>
-
     </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+        {{ $isApproveBooking->appends(request()->query())->links('pagination::bootstrap-4') }}
+    </div>
+
+
 
     <script>
         //message

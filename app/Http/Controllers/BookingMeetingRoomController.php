@@ -66,6 +66,7 @@ class BookingMeetingRoomController extends Controller
                 'booking_meeting_rooms.id',
                 'guests.name',
                 'guests.email',
+                'guests.phoneNumber',
                 'date',
                 'topicOfMeeting',
                 'directedBy',
@@ -177,8 +178,9 @@ class BookingMeetingRoomController extends Controller
     public function adminDestroy(Request $request, string $bookingId)
     {
         $booking = BookingMeetingRoom::find($bookingId);
+        Guest::where('bookingId', $bookingId)->delete();
         $booking->delete();
-        return redirect('/booking')->with('message', 'Update Successfully');
+        return redirect('/booking')->with('message', 'ការលុបទទួលបានជោគជ័យ​ សូមអរគុណ។');
     }
 
     public function adminApprove(Request $request, string $bookingId)

@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BookingMeetingRoom extends Model
 {
     use HasFactory;
     protected $table = 'booking_meeting_rooms';
     protected $fillable = [
-        'userId',
         'date',
         'topicOfMeeting',
         'directedBy',
@@ -24,4 +24,11 @@ class BookingMeetingRoom extends Model
         'description',
         'isApprove'
     ];
+
+    public function guest(): HasOne
+    {
+        return $this->hasOne(Guest::class, "bookingId");
+    }
+
+
 }

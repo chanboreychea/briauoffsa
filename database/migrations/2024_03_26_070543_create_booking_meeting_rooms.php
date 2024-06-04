@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('directedBy');
             $table->string('nameDirectedBy', 100);
             $table->string('meetingLevel');
+            $table->string('regulator')->nullable();
             $table->string('interOfficeOrDepartmental')->nullable();
             $table->string('member');
             $table->string('room');
