@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Enum\MeetingLevel;
 use Illuminate\Support\Collection;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Maatwebsite\Excel\Concerns\FromArray;
@@ -126,16 +127,24 @@ class BookingMeetingRoomExport implements WithTitle, WithDrawings, WithHeadings,
     public function array(): array
     {
         $booking = [];
+        $meetingLevels = MeetingLevel::MEETING_LEVEL;
+        $no = 0;
         foreach ($this->data as $key => $item) {
-
+            $meeting = "";
+            foreach ($meetingLevels as $key => $meetingLevel) {
+                if ($key == $item->meetingLevel) {
+                    $meeting = $meetingLevel;
+                    break;
+                }
+            }
             $booking[] = [
-                $key + 1,
+                $no += 1,
                 $item->date,
                 $item->topicOfMeeting,
                 $item->directedBy,
                 $item->nameDirectedBy,
                 $item->name,
-                $item->meetingLevel,
+                $meeting,
                 $item->member,
                 $item->room,
                 $item->time,

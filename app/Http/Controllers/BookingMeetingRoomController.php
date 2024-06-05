@@ -118,25 +118,17 @@ class BookingMeetingRoomController extends Controller
     {
         $previousUrl = URL::previous();
         $parsedUrl = parse_url($previousUrl);
-        $defaultDate = $this->getDatesByPeriodName('this_month', Carbon::now());
+        // $defaultDate = $this->getDatesByPeriodName('this_month', Carbon::now());
 
         if (isset($parsedUrl['query'])) {
             parse_str($parsedUrl['query'], $queryParams);
-            $fromDate = $queryParams['fromDate'];
-            $toDate = $queryParams['toDate'];
-            $room = $queryParams['room'];
-            $directedBy = $queryParams['directedBy'];
-            $meeting = $queryParams['meetingLevel'];
-            if ($fromDate == "") {
-                $fromDate = Carbon::parse($defaultDate[0])->format('Y-m-d');
-            }
-            if ($toDate == "") {
-                $toDate = Carbon::parse($defaultDate[1])->format('Y-m-d');
-            }
-        } else {
-            $fromDate = Carbon::parse($defaultDate[0])->format('Y-m-d');
-            $toDate = Carbon::parse($defaultDate[1])->format('Y-m-d');
         }
+
+        $fromDate = $queryParams['fromDate'] ?? null;
+        $toDate = $queryParams['toDate'] ?? null;
+        $room = $queryParams['room'] ?? null;
+        $directedBy = $queryParams['directedBy'] ?? null;
+        $meeting = $queryParams['meetingLevel'] ?? null;
 
         $query = DB::table('booking_meeting_rooms')
             ->join('guests', 'guests.bookingId', '=', 'booking_meeting_rooms.id')
@@ -144,6 +136,9 @@ class BookingMeetingRoomController extends Controller
                 'booking_meeting_rooms.id',
                 'guests.name',
                 'guests.email',
+                'guests.phoneNumber',
+                'guests.position',
+                'guests.created_at',
                 'date',
                 'topicOfMeeting',
                 'directedBy',
@@ -156,7 +151,7 @@ class BookingMeetingRoomController extends Controller
                 'description',
             );
 
-        if ($fromDate && $toDate) {
+        if (isset($fromDate) && $fromDate != null && isset($toDate) && $toDate != null) {
             $query->whereBetween('date', [Carbon::parse($fromDate)->format('Y-m-d'), Carbon::parse($toDate)->format('Y-m-d')]);
         }
 
