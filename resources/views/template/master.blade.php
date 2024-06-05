@@ -86,8 +86,15 @@
         <div class="container">
             <div class="main-header">
                 <div class="header-left">
-                    <div class="header-logo"><a class="d-flex" href="/admins"><img alt="iauoffsa"
-                                src="{{ asset('assets/images/logo.png') }}"></a></div>
+                    <div class="header-logo">
+                        @if (Session::get('is_user_logged_in') || Session::get('is_admin_logged_in'))
+                            <img alt="iauoffsa" src="{{ asset('assets/images/logo.png') }}">
+                        @else
+                            <a class="d-flex" href="/admins">
+                                <img alt="iauoffsa" src="{{ asset('assets/images/logo.png') }}">
+                            </a>
+                        @endif
+                    </div>
                 </div>
 
                 <div class="header-nav">
@@ -174,7 +181,7 @@
 
         <section class="section-box mt-100 mb-100">
             <div class="container">
-
+                <div class="d-sm-none mt-100"></div>
                 @yield('contents')
 
             </div>

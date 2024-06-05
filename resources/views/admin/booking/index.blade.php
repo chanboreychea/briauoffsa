@@ -121,9 +121,9 @@
         </div>
     </div> --}}
 
-    <div class="">
+    {{-- <div class="">
         <div class="card-header bg-gray">
-            {{-- <form action="/booking" action="GET">
+            <form action="/booking" action="GET">
                 @csrf
                 <div class="row d-flex align-items-center">
 
@@ -207,11 +207,11 @@
                     </div>
 
                 </div>
-            </form> --}}
+            </form>
         </div>
         <div class="card-body bg-gray table-responsive">
 
-            {{-- <table class="table table-sm table-bordered">
+            <table class="table table-sm table-bordered">
                 <thead class="thead-light">
                     <th class="text-center">ល.រ</th>
                     <th class="text-center">កាលបរិច្ឆេទ</th>
@@ -330,11 +330,11 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table> --}}
+            </table>
 
         </div>
 
-        {{-- <div class="card-footer">
+        <div class="card-footer">
             <div class="row">
                 @if ($isApproveBooking->hasPages())
                     <div class="d-flex justify-content-between aligh-items-center">
@@ -369,8 +369,8 @@
                 @endif
 
             </div>
-        </div> --}}
-    </div>
+        </div>
+    </div> --}}
 
     <nav class="navbar bg-dark rounded p-2">
 
@@ -444,11 +444,11 @@
                     </div>
                 </div>
 
-                <div class="col-lg-2 col-sm-12">
-                    <div class="d-flex">
-                        <input class="btn btn-success text-white rounded" type="submit" value="ស្វែងរក">
-                        <a href="/booking/export/excel" class="btn btn-success text-white rounded">ទាញយក</a>
-                    </div>
+                <div class="col-lg-2 col-sm-12 d-flex justify-content-between gap-1">
+
+                    <input class="btn btn-success text-white rounded" type="submit" value="ស្វែងរក">
+                    <a href="/booking/export/excel" class="btn btn-success text-white rounded">ទាញយក</a>
+
                 </div>
 
             </div>
@@ -459,8 +459,8 @@
     <div class="row table-responsive mt-20">
         <table class="table table-sm table-bordered">
             <thead class="thead-light">
-                <th class="text-center">ល.រ</th>
-                <th class="text-center">កាលបរិច្ឆេទ</th>
+                <th style="width: 2%" class="text-center">ល.រ</th>
+                <th style="width: 7%" class="text-center">កាលបរិច្ឆេទ</th>
                 <th>ប្រធានបទ</th>
                 <th>តួនាទី</th>
                 <th>ដឹកនាំដោយ</th>
@@ -468,7 +468,7 @@
                 <th>បន្ទប់/ម៉ោង</th>
                 <th>ឈ្មោះអ្នកស្នើសុំ</th>
                 <th>ស្ថានភាព</th>
-                <th class="text-center">សកម្មភាព</th>
+                <th style="width: 8%" class="text-center">សកម្មភាព</th>
             </thead>
             <tbody>
                 @foreach ($isApproveBooking as $key => $item)
@@ -559,16 +559,14 @@
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-label"
-                                                            for="phoneNumber">លេខទូរស័ព្ទ</label>
+                                                        <label class="form-label" for="phoneNumber">លេខទូរស័ព្ទ</label>
                                                         <input type="text" id="phoneNumber"
                                                             value="{{ $item->phoneNumber }}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-label"
-                                                            for="email">អ៊ីម៉ែល</label>
+                                                        <label class="form-label" for="email">អ៊ីម៉ែល</label>
                                                         <input type="email" name="email" value="{{ $item->email }}"
                                                             class="form-control" id="email">
                                                     </div>
