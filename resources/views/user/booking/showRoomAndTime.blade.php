@@ -289,6 +289,9 @@
                                 <div>
                                     <textarea name="description" id="description" class="form-control" cols="30" rows="3"></textarea>
                                 </div>
+                                @error('description')
+                                    <small class="form-text text-danger font-khmer1">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
 

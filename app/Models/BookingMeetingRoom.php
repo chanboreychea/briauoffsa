@@ -22,6 +22,7 @@ class BookingMeetingRoom extends Model
         'room',
         'time',
         'description',
+        'bookingReason',
         'isApprove'
     ];
 
@@ -29,6 +30,4 @@ class BookingMeetingRoom extends Model
     {
         return $this->hasOne(Guest::class, "bookingId");
     }
-
-
 }

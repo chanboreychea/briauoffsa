@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('room');
             $table->string('time');
             $table->text('description')->nullable();
-            $table->string('isApprove', 2);
+            $table->string('bookingReason')->nullable();
+            $table->string('isApprove', 1);
             $table->timestamps();
         });
     }

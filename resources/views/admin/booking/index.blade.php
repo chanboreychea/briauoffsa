@@ -493,15 +493,23 @@
                         </td>
                         <td>
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->room }}">
-                                {{ $item->time }}
+                                <div class="times">{{ $item->time }}</div>
                             </div>
                         </td>
                         <td>{{ $item->name }}</td>
 
                         @if ($item->isApprove == 1)
-                            <td class="text-success">អនុញ្ញាត</td>
+                            <td class="text-center text-success">
+                                <div data-toggle="tooltip" data-html="true" title="{{ $item->bookingReason }}">
+                                    អនុញ្ញាត
+                                </div>
+                            </td>
                         @elseif ($item->isApprove == 2)
-                            <td class="text-danger">បដិសេធ</td>
+                            <td class="text-center text-danger">
+                                <div data-toggle="tooltip" data-html="true" title="{{ $item->bookingReason }}">
+                                    បដិសេធ
+                                </div>
+                            </td>
                         @else
                             <td class="text-primary">រងចាំ...</td>
                         @endif
@@ -524,18 +532,18 @@
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group row text-muted text-center">
-                                                    <label for="description"
-                                                        class="form-label col-lg-4 text-info">គោលបំណង:</label>
+                                                    <label for="bookingReason"
+                                                        class="form-label col-lg-4 text-info">បរិយាយ:</label>
                                                     <div class="col-lg-8">
-                                                        <textarea name="description" id="description" class="form-control" cols="30" rows="3"></textarea>
+                                                        <textarea name="bookingReason" id="bookingReason" class="form-control" cols="30" rows="3">{{ $item->bookingReason }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <input type="submit" name="reject" class="btn btn-danger rounded"
-                                                    value="បដិសេធ">
-                                                <input type="submit" name="approve" class="btn btn-primary rounded"
-                                                    value="អនុញ្ញាត">
+                                                <input type="submit" name="reject"
+                                                    class="btn btn-danger btn-sm rounded" value="បដិសេធ">
+                                                <input type="submit" name="approve"
+                                                    class="btn btn-primary btn-sm rounded" value="អនុញ្ញាត">
                                             </div>
                                         </form>
                                     </div>
@@ -620,6 +628,57 @@
         setTimeout(function() {
             $('#success-alert, #error-alert').fadeOut('slow');
         }, 5000);
+
+        var times = document.querySelectorAll('.times');
+        times.forEach(element => {
+            var timeValue = element.textContent || element.innerText;
+            element.textContent = mergeTimeRanges(timeValue);
+            // console.log(mergeTimeRanges(timeValue));
+        });
+
+        function mergeTimeRanges(inputString) {
+            // Split the input string into individual ranges
+            const ranges = inputString.split(', ');
+
+            // Parse the ranges into objects with prefix, start, and end times
+            const parsedRanges = ranges.map(range => {
+                const [prefix, time] = range.split(' ');
+                const [start, end] = time.split('-').map(Number);
+                return {
+                    prefix,
+                    start,
+                    end
+                };
+            });
+
+            // Sort the ranges by start time
+            parsedRanges.sort((a, b) => a.start - b.start);
+
+            // Merge the ranges
+            const mergedRanges = [];
+            let currentRange = parsedRanges[0];
+
+            for (let i = 1; i < parsedRanges.length; i++) {
+                const nextRange = parsedRanges[i];
+
+                // Check if the current range overlaps or is consecutive with the next range
+                if (currentRange.end >= nextRange.start) {
+                    // Merge the ranges by extending the end time
+                    currentRange.end = Math.max(currentRange.end, nextRange.end);
+                } else {
+                    // Push the current range to the merged ranges and start a new range
+                    mergedRanges.push(currentRange);
+                    currentRange = nextRange;
+                }
+            }
+
+            // Push the last range
+            mergedRanges.push(currentRange);
+
+            // Format the merged ranges back into the desired output format
+            const result = mergedRanges.map(range => `${range.prefix} ${range.start}-${range.end}`).join(', ');
+            return result;
+        }
     </script>
 
 @endsection

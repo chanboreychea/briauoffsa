@@ -33,6 +33,12 @@
     @endif
 @endsection
 
+@section('header-right')
+    <a href="https://t.me/kakadaa_07"
+        class="btn btn-sm btn-outline-primary rounded-5 d-flex align-items-center justify-content-between pe-5 pe-5"><i
+            class="fab fa-telegram fs-3 me-2"></i>មន្រ្តីទទួលបន្ទុក</a>
+@endsection
+
 @section('contents')
     <div class="card">
         <div class="card-header bg-success">

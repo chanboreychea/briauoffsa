@@ -36,34 +36,35 @@
     <div class="block-signin">
         <!-- <a class="text-link-bd-btom hover-up" href="page-register.html">Register</a> -->
 
-        <a class="btn btn-default" href="/guests">ស្នើសុំកក់បន្ទប់ប្រជុំ</a>
+        <a class="btn btn-primary rounded-3 shadow-sm" href="/guests">ស្នើសុំកក់បន្ទប់ប្រជុំ</a>
 
     </div>
 @endsection
 
 @section('contents')
     <div class="d-flex justify-content-center mb-20">
-        <div class="text-primary" style="font-family: khmer mef2;font-size: 24px">ព័ត៌មានអំពីកិច្ចប្រជុំ
+        <div class="" style="font-family: khmer mef2;font-size: 24px;color:#012E89">ព័ត៌មានអំពីកិច្ចប្រជុំ
         </div>
     </div>
 
     <div class="row table-responsive mt-5">
-        <table class="table table-bordered">
-            <thead class="thead-primary">
-                <th class="text-center bg-priamry">ល.រ</th>
-                <th class="text-center">កាលបរិច្ឆេទ</th>
-                <th class="text-center">ប្រធានបទ</th>
-                <th class="text-center">តួនាទី</th>
-                <th class="text-center">ដឹកនាំដោយ</th>
-                <th class="text-center">ប្រភេទកិច្ចប្រជុំ</th>
-                <th class="text-center">បន្ទប់/ម៉ោង</th>
-                <th class="text-center">ឈ្មោះអ្នកស្នើសុំ</th>
-                <th class="text-center">ស្ថានភាព</th>
+        <table class="table table-bordered table-hover">
+            {{-- table-striped --}}
+            <thead class="thead">
+                <th class="text-center bg-primary text-light">ល.រ</th>
+                <th class="text-center bg-primary text-light">កាលបរិច្ឆេទ</th>
+                <th class="text-center bg-primary text-light">ប្រធានបទ</th>
+                <th class="text-center bg-primary text-light">តួនាទី</th>
+                <th class="text-center bg-primary text-light">ដឹកនាំដោយ</th>
+                <th class="text-center bg-primary text-light">ប្រភេទកិច្ចប្រជុំ</th>
+                <th class="text-center bg-primary text-light">បន្ទប់/ម៉ោង</th>
+                <th class="text-center bg-primary text-light">ឈ្មោះអ្នកស្នើសុំ</th>
+                <th class="text-center bg-primary text-light">ស្ថានភាព</th>
             </thead>
             <tbody>
                 @foreach ($booking as $key => $item)
                     <tr>
-                        <td class="text-center">{{ $key + 1 }}</td>
+                        <td class="text-center bg-primary text-light">{{ $key + 1 }}</td>
                         <td class="text-center">{{ $item->date }}</td>
                         <td class="">
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->description }}">
@@ -73,7 +74,6 @@
                         <td class="">{{ $item->directedBy }}</td>
                         <td class="">{{ $item->nameDirectedBy }}</td>
                         <td class="">
-
                             @if ($item->meetingLevel == 9)
                                 @php
                                     $regulatorName = '';
@@ -102,15 +102,23 @@
                         </td>
                         <td class="">
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->room }}">
-                                {{ $item->time }}
+                                <div class="times">{{ $item->time }}</div>
                             </div>
                         </td>
                         <td class="">{{ $item->name }}</td>
                         </td>
                         @if ($item->isApprove == 1)
-                            <td class="text-center text-success">អនុញ្ញាត</td>
+                            <td class="text-center text-success">
+                                <div data-toggle="tooltip" data-html="true" title="{{ $item->bookingReason }}">
+                                    អនុញ្ញាត
+                                </div>
+                            </td>
                         @elseif ($item->isApprove == 2)
-                            <td class="text-center text-danger">បដិសេធ</td>
+                            <td class="text-center text-danger">
+                                <div data-toggle="tooltip" data-html="true" title="{{ $item->bookingReason }}">
+                                    បដិសេធ
+                                </div>
+                            </td>
                         @else
                             <td class="text-center text-primary">រងចាំ...</td>
                         @endif
@@ -155,4 +163,57 @@
     <div class="d-flex justify-content-center align-items-center">
         {{ $booking->appends(request()->query())->links('pagination::bootstrap-4') }}
     </div>
+
+    <script>
+        var times = document.querySelectorAll('.times');
+        times.forEach(element => {
+            var timeValue = element.textContent || element.innerText;
+            element.textContent = mergeTimeRanges(timeValue);
+            // console.log(mergeTimeRanges(timeValue));
+        });
+
+        function mergeTimeRanges(inputString) {
+            // Split the input string into individual ranges
+            const ranges = inputString.split(', ');
+
+            // Parse the ranges into objects with prefix, start, and end times
+            const parsedRanges = ranges.map(range => {
+                const [prefix, time] = range.split(' ');
+                const [start, end] = time.split('-').map(Number);
+                return {
+                    prefix,
+                    start,
+                    end
+                };
+            });
+
+            // Sort the ranges by start time
+            parsedRanges.sort((a, b) => a.start - b.start);
+
+            // Merge the ranges
+            const mergedRanges = [];
+            let currentRange = parsedRanges[0];
+
+            for (let i = 1; i < parsedRanges.length; i++) {
+                const nextRange = parsedRanges[i];
+
+                // Check if the current range overlaps or is consecutive with the next range
+                if (currentRange.end >= nextRange.start) {
+                    // Merge the ranges by extending the end time
+                    currentRange.end = Math.max(currentRange.end, nextRange.end);
+                } else {
+                    // Push the current range to the merged ranges and start a new range
+                    mergedRanges.push(currentRange);
+                    currentRange = nextRange;
+                }
+            }
+
+            // Push the last range
+            mergedRanges.push(currentRange);
+
+            // Format the merged ranges back into the desired output format
+            const result = mergedRanges.map(range => `${range.prefix} ${range.start}-${range.end}`).join(', ');
+            return result;
+        }
+    </script>
 @endsection

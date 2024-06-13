@@ -1,4 +1,5 @@
 @import url(https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800);
+
 /*import vendors*/
 @import url(vendors/normalize.css);
 @import url(vendors/bootstrap.min.css);
@@ -10,6 +11,15 @@
 @import url(plugins/perfect-scrollbar.css);
 @import url(plugins/animate.min.css);
 
+@font-face {
+    font-family: khmermef1;
+    src: url(public/assets/fonts/khmermef1/mef1.ttf);
+}
+@font-face {
+    font-family: khmermef2;
+    src: url(public/assets/fonts/khmermef2/mef2.ttf);
+}
+
 /*RESET*/
 html,
 body,
@@ -18,12 +28,6 @@ span,
 applet,
 object,
 iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
 p,
 blockquote,
 pre,
@@ -92,6 +96,22 @@ time,
 mark,
 audio,
 video {
+    margin: 0;
+    padding: 0;
+    /* border: 0; */
+    font-family: khmermef1, Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: khmermef2;
     margin: 0;
     padding: 0;
     /* border: 0; */
@@ -4246,7 +4266,7 @@ ul li:last-child .card-list-4 {
     height: 20px;
     cursor: pointer;
     transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-    top: 7px;
+    top: 25px;
     right: 15px;
     display: none;
     z-index: 999999;
@@ -4274,7 +4294,7 @@ ul li:last-child .card-list-4 {
 
 .burger-icon.burger-close {
     position: fixed;
-    top: 21px !important;
+    top: 25px !important;
     right: 15px;
 }
 

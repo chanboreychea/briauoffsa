@@ -44,6 +44,7 @@ class BookingMeetingRoomController extends Controller
                 'interOfficeOrDepartmental',
                 'member',
                 'description',
+                'bookingReason',
                 'room',
                 'time',
                 'isApprove'
@@ -80,6 +81,7 @@ class BookingMeetingRoomController extends Controller
                 'room',
                 'time',
                 'description',
+                'bookingReason',
                 'isApprove'
             );
 
@@ -185,20 +187,24 @@ class BookingMeetingRoomController extends Controller
         $booking = BookingMeetingRoom::find($bookingId);
 
         $request->validate([
-            'description' => 'max:255'
+            'bookingReason' => 'max:255'
         ]);
 
-        $description = $request->input('description') ? $request->input('description') : 'បន្ទប់ជាប់រវល់';
+
 
         if ($request->input('approve')) {
+            $bookingReason = $request->input('bookingReason') ?? 'យល់ព្រមសំណើរ';
             $booking->isApprove = Status::APPROVE;
+            $booking->bookingReason = $bookingReason;
             $message = "បន្ទប់ទំនេរ" . PHP_EOL . "ប្រធានបទស្តីពី៖ $booking->topicOfMeeting" . PHP_EOL .
                 "ប្រភេទបន្ទប់ប្រជុំ៖ បន្ទប់ប្រជុំ $booking->room" . PHP_EOL . "ម៉ោង៖ $booking->time";
         }
         if ($request->input('reject')) {
+            $bookingReason = $request->input('bookingReason') ?? 'បន្ទប់ជាប់រវល់';
             $booking->isApprove = Status::REJECT;
+            $booking->bookingReason = $bookingReason;
             $message = "បន្ទប់ជាប់រវល់" . PHP_EOL . "ប្រធានបទស្តីពី៖ $booking->topicOfMeeting" . PHP_EOL .
-                "ប្រភេទបន្ទប់ប្រជុំ៖ បន្ទប់ប្រជុំ $booking->room" . PHP_EOL . "ម៉ោង៖ $booking->time" . PHP_EOL . "មូលហេតុ៖ $description";
+                "ប្រភេទបន្ទប់ប្រជុំ៖ បន្ទប់ប្រជុំ $booking->room" . PHP_EOL . "ម៉ោង៖ $booking->time" . PHP_EOL . "មូលហេតុ៖ $bookingReason";
         }
 
         $booking->save();
@@ -318,7 +324,7 @@ class BookingMeetingRoomController extends Controller
             'directedBy' => 'bail|required|max:100',
             'nameDirectedBy' => 'bail|required|max:100',
             'member' => 'bail|required|digits_between:1,2',
-            'description' => 'max:255',
+            'description' => 'bail|required|max:255',
             'room' => 'required',
             'times' => 'required',
         ];
@@ -332,6 +338,7 @@ class BookingMeetingRoomController extends Controller
             'member.required' => 'សូមបញ្ចូលនូវចំនួនសមាជិក',
             'member.min' => 'អក្សរអនុញ្ញាតតិចបំផុតត្រឹម​ ២ តួរ',
             'member.max' => 'អក្សរអនុញ្ញាតត្រឹម​ ១០០​ តួរ',
+            'description.required' => 'សូមបញ្ចូលនូវគោលបំណងប្រធានបទ',
             'description.max' => 'អក្សរអនុញ្ញាតត្រឹម​ ២៥៥​ តួរ',
             'room.required' => 'សូមជ្រើសរើសបន្ទប់',
             'times.required' => 'សូមជ្រើសរើសម៉ោង',
@@ -351,7 +358,7 @@ class BookingMeetingRoomController extends Controller
         $date = Carbon::parse($request->input('date'))->format("Y-m-d");
         $room = $request->input('room');
         $times = $request->input('times');
-        $description = $request->input('description') ? $request->input('description') : null;
+        $description = $request->input('description') ?? null;
 
         $name = session('name');
         $position = session('position');

@@ -3,8 +3,6 @@
 namespace Database\Factories;
 
 use App\Enum\Department;
-use App\Enum\MeetingLevel;
-use App\Enum\Regulator;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -47,7 +45,7 @@ class BookingMeetingRoomFactory extends Factory
             'interOfficeOrDepartmental' => $this->faker->randomElement($interOfficeOrDepartmental),
             'member' => $this->faker->randomNumber(2),
             'room' => $this->faker->randomElement(['A', 'B']),
-            'time' => $this->faker->randomElement(['A 7-8, A 8-9', 'B 7-8, B 8-9', "B 2-3", "A 2-3"]),
+            'time' => $this->faker->randomElement(['A 7-8, A 8-9, A 9-10', 'B 7-8, B 8-9', "B 2-3, B 3-4, B 4-5", "A 2-3"]),
             'description' => Str::random(10),
             'isApprove' => 0
         ];

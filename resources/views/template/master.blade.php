@@ -117,11 +117,11 @@
                     @yield('message')
                 </div>
 
-
-                {{-- <a href="/login" class="burger-icon btn btn-default">Sign in</a> --}}
                 <div class="burger-icon burger-icon-white">
-                    <span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span
-                        class="burger-icon-bottom"></span>
+                    {{-- <i class="fas fa-bars fs-2"></i> --}}
+                    <span class="burger-icon-top"></span>
+                    <span class="burger-icon-mid"></span>
+                    <span class="burger-icon-bottom"></span>
                 </div>
 
                 <div class="header-right">
@@ -136,6 +136,7 @@
             </div>
         </div>
     </header>
+
     <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-content-area">
@@ -156,6 +157,8 @@
                                 @else
                                     <li class="has-children"><a class=""
                                             href="/guests">ស្នើរសុំកក់បន្ទប់ប្រជុំ</a></li>
+                                    <li class="has-children"><a
+                                            href="https://t.me/kakadaa_07">ទំនាក់ទំនងមន្រ្តីទទួលបន្ទុក</a></li>
                                 @endif
 
                                 {{-- @if (Session::get('is_admin_logged_in'))
@@ -177,6 +180,7 @@
             </div>
         </div>
     </div>
+
     <main class="main" style="min-height: 75vh; height:auto">
 
         <section class="section-box mt-100 mb-100">
