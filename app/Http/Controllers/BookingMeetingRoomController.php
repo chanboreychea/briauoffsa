@@ -27,9 +27,11 @@ class BookingMeetingRoomController extends Controller
         $meetingLevel = MeetingLevel::MEETING_LEVEL;
         $regulator = Regulator::REGULATOR;
 
+        $dateLastThirtyDay = $this->getDatesByPeriodName('last_30_days', Carbon::now());
+        
         $booking = DB::table('booking_meeting_rooms')
             ->join('guests', 'guests.bookingId', '=', 'booking_meeting_rooms.id')
-            // ->where('booking_meeting_rooms.date', '>=', Carbon::now()->format('Y-m-01'))
+            ->where('booking_meeting_rooms.date', '>=', $dateLastThirtyDay[0])
             ->orderByDesc('date')
             ->select(
                 'guests.email',
