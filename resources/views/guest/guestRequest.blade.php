@@ -41,9 +41,9 @@
 
 @section('contents')
     <div class="card">
-        <div class="card-header bg-success">
-            <div class="">
-                <h5 class="text-light">ទម្រង់ព័ត៌មានរបស់អ្នកស្នើសុំកក់បន្ទប់ប្រជុំ</h5>
+        <div class="card-header bg-secondary">
+            <div class="d-flex justify-content-center p-3">
+                <h5 class="text-light font-khmer2">ទម្រង់ព័ត៌មានរបស់អ្នកស្នើសុំកក់បន្ទប់ប្រជុំ</h5>
             </div>
         </div>
         <form action="/guests/request" method="get">

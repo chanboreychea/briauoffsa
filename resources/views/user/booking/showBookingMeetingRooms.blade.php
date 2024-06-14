@@ -51,20 +51,20 @@
         <table class="table table-bordered table-hover">
             {{-- table-striped --}}
             <thead class="thead">
-                <th class="text-center bg-primary text-light">ល.រ</th>
-                <th class="text-center bg-primary text-light">កាលបរិច្ឆេទ</th>
-                <th class="text-center bg-primary text-light">ប្រធានបទ</th>
-                <th class="text-center bg-primary text-light">តួនាទី</th>
-                <th class="text-center bg-primary text-light">ដឹកនាំដោយ</th>
-                <th class="text-center bg-primary text-light">ប្រភេទកិច្ចប្រជុំ</th>
-                <th class="text-center bg-primary text-light">បន្ទប់/ម៉ោង</th>
-                <th class="text-center bg-primary text-light">ឈ្មោះអ្នកស្នើសុំ</th>
-                <th class="text-center bg-primary text-light">ស្ថានភាព</th>
+                <th style="width: 2%" class="text-center bg-info text-light">ល.រ</th>
+                <th style="width: 8%" class="text-center bg-info text-light">កាលបរិច្ឆេទ</th>
+                <th style="width: 20%" class="text-center bg-info text-light">ប្រធានបទ</th>
+                <th style="width: 10%" class="text-center bg-info text-light">តួនាទី</th>
+                <th style="width: 10%" class="text-center bg-info text-light">ដឹកនាំដោយ</th>
+                <th style="width: 20%" class="text-center bg-info text-light">ប្រភេទកិច្ចប្រជុំ</th>
+                <th style="width: 6%" class="text-center bg-info text-light">បន្ទប់/ម៉ោង</th>
+                <th style="width: 10%" class="text-center bg-info text-light">ឈ្មោះអ្នកស្នើសុំ</th>
+                <th style="width: 4%" class="text-center bg-info text-light">ស្ថានភាព</th>
             </thead>
             <tbody>
                 @foreach ($booking as $key => $item)
                     <tr>
-                        <td class="text-center bg-primary text-light">{{ $key + 1 }}</td>
+                        <td class="text-center">{{ $key + 1 }}</td>
                         <td class="text-center">{{ $item->date }}</td>
                         <td class="">
                             <div data-toggle="tooltip" data-html="true" title="{{ $item->description }}">
