@@ -1,5 +1,4 @@
 @extends('template.master')
-@section('title', 'User')
 
 @section('message')
     @if ($message = Session::get('message'))
@@ -26,7 +25,6 @@
 @endsection
 
 @section('contents')
-
     <style>
         .wrapper {
             width: 100%;
@@ -76,16 +74,17 @@
         }
     </style>
 
-    <div class="wrapper">
+    <div class="wrapper d-flex justify-content-center flex-column mt-50">
 
-        <div class="w-left">
-            <div class="d-flex align-items-end"><span>Here is your codes:</span>
-                <h4>  {{ $randomNumber }}</h4>
+        <div class="w-left d-flex justify-content-center align-items-center flex-column">
+            <div class="d-flex align-items-end">
+                <h4> {{ $randomNumber }}</h4>
             </div>
-            <div id="countdown">
+            <div id="countdown" class="font-khmer1">
             </div>
-            <h2>Enter codes above:</h2>
-            <div class="otp-field">
+            <h3>ចូរបំពេញនូវលេខកូដ</h3>
+
+            <div class="otp-field d-flex justify-content-center mt-2">
                 <input type="text" maxlength="1" />
                 <input type="text" maxlength="1" />
                 <input class="space" type="text" maxlength="1" />
@@ -93,16 +92,17 @@
                 <input type="text" maxlength="1" />
                 <input type="text" maxlength="1" />
             </div>
-            <div class="submit">
-                <a href="/guests" class="btn-dark btn-sm">Back</a>
 
-                <form action="/guests/login" method="GET">
-                    <input type="hidden" name="code" id="code">
-                    <input type="submit" class="d-none" id="send" value="Send">
-                </form>
+        </div>
+        <div class="submit" style="width: 25%">
+            <a href="/guests" class="btn-dark btn-sm font-khmer1">បោះបង់</a>
 
-                <a href="/guests/request" class="btn-dark btn-sm">Resend Code</a>
-            </div>
+            <form action="/guests/login" method="GET">
+                <input type="hidden" name="code" id="code">
+                <input type="submit" class="d-none" id="send" value="Send">
+            </form>
+
+            <a href="/guests/request" class="btn-dark btn-sm font-khmer1">ផ្ញើរកូដម្តងទៀត</a>
         </div>
 
     </div>
@@ -179,7 +179,7 @@
             countdownElement.innerHTML = countdownTime + ' seconds';
             if (countdownTime <= 0) {
                 clearInterval(countdownInterval);
-                countdownElement.innerHTML = 'Time is up!';
+                countdownElement.innerHTML = 'ផុតកំណត់';
             }
         }
         const countdownInterval = setInterval(updateCountdown, 1000);

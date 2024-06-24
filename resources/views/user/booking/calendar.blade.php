@@ -26,7 +26,7 @@
 
 @section('contents')
     <div class="d-flex justify-content-center align-items-start">
-        <h4>{{ $date }}</h4>
+        <h4 style="color:#012E89">{{ $date }}</h4>
     </div>
     <div class="mb-3 mt-3 d-flex justify-content-between align-items-center">
 
@@ -53,15 +53,15 @@
             <thead class="thead-light">
                 <tr>
                     <th style="text-align: center" class="text-danger">អាទិត្យ</th>
-                    <th style="text-align: center">ច័ន្ទ</th>
-                    <th style="text-align: center">អង្គារ</th>
-                    <th style="text-align: center">ពុធ</th>
-                    <th style="text-align: center">
+                    <th style="text-align: center;color:#012E89">ច័ន្ទ</th>
+                    <th style="text-align: center;color:#012E89">អង្គារ</th>
+                    <th style="text-align: center;color:#012E89">ពុធ</th>
+                    <th style="text-align: center;color:#012E89">
                         <div class="d-none d-sm-block">ព្រហស្បតិ៍</div>
                         <div class="d-block d-sm-none">ព្រ.ហ</div>
                     </th>
-                    <th style="text-align: center">សុក្រ</th>
-                    <th style="text-align: center">សៅរ៍</th>
+                    <th style="text-align: center;color:#012E89">សុក្រ</th>
+                    <th style="text-align: center;color:#012E89">សៅរ៍</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,7 +69,7 @@
                     <tr>
                         @foreach ($week as $key => $day)
                             @if ($key == 0 || $key == 6)
-                                <td style="text-align: center" class="text-danger">
+                                <td style="text-align: center;color:#012E89" class="text-danger">
                                     {{ $day }}
                                 </td>
                             @else
@@ -81,7 +81,7 @@
                                             {{ $day }}
                                         </a>
                                     @else
-                                        <div style="text-align: center">{{ $day }}</div>
+                                        <div style="text-align: center;color:#012E89">{{ $day }}</div>
                                     @endif
                                 </td>
                             @endif

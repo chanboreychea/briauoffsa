@@ -43,21 +43,21 @@ Route::get('/guests', [GuestController::class, 'index']);
 Route::get('/guests/request', [GuestController::class, 'getCode']);
 Route::get('/guests/login', [GuestController::class, 'loginWithGenerateCode']);
 
-Route::get('/d', function () {
-    $directedBy = [];
-    $interOfficeOrDepartmental = [];
-    $departments = Department::DEPARTMENTS;
-    $directedBy[] = "ប្រធានអង្គភាព";
-    $directedBy[] = "អនុប្រធានអង្គភាព";
-    $interOfficeOrDepartmental[] = null;
-    foreach ($departments as $key => $department) {
-        $directedBy[] = "ប្រធាននាយកដ្ឋាន " . $key;
-        $directedBy[] = "អនុប្រធាននាយកដ្ឋាន " . $key;
-        foreach ($department as $key => $office) {
-            $directedBy[] = "ប្រធានការិយាល័យ " . $office;
-            $directedBy[] = "អនុប្រធានការិយាល័យ " . $office;
-            $interOfficeOrDepartmental[] = $office;
-        }
-    }
-    dd($interOfficeOrDepartmental);
-});
+// Route::get('/d', function () {
+//     $directedBy = [];
+//     $interOfficeOrDepartmental = [];
+//     $departments = Department::DEPARTMENTS;
+//     $directedBy[] = "ប្រធានអង្គភាព";
+//     $directedBy[] = "អនុប្រធានអង្គភាព";
+//     $interOfficeOrDepartmental[] = null;
+//     foreach ($departments as $key => $department) {
+//         $directedBy[] = "ប្រធាននាយកដ្ឋាន " . $key;
+//         $directedBy[] = "អនុប្រធាននាយកដ្ឋាន " . $key;
+//         foreach ($department as $key => $office) {
+//             $directedBy[] = "ប្រធានការិយាល័យ " . $office;
+//             $directedBy[] = "អនុប្រធានការិយាល័យ " . $office;
+//             $interOfficeOrDepartmental[] = $office;
+//         }
+//     }
+//     dd($interOfficeOrDepartmental);
+// });
