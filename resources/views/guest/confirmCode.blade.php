@@ -35,8 +35,9 @@
         }
 
         .submit {
+            width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             align-items: center;
             margin-top: 5px;
         }
@@ -94,17 +95,18 @@
             </div>
 
         </div>
-        <div class="submit" style="width: 25%">
+        <div class="submit">
+            <div></div>
             <a href="/guests" class="btn-dark btn-sm font-khmer1">បោះបង់</a>
 
-            <form action="/guests/login" method="GET">
-                <input type="hidden" name="code" id="code">
-                <input type="submit" class="d-none" id="send" value="Send">
-            </form>
-
             <a href="/guests/request" class="btn-dark btn-sm font-khmer1">ផ្ញើរកូដម្តងទៀត</a>
+            <div></div>
         </div>
 
+        <form action="/guests/login" method="GET">
+            <input type="hidden" name="code" id="code">
+            <input type="submit" class="d-none" id="send" value="Send">
+        </form>
     </div>
 
     <script>

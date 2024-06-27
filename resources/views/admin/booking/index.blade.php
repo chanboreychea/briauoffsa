@@ -372,89 +372,91 @@
         </div>
     </div> --}}
 
-    <nav class="navbar bg-dark rounded p-2">
+    {{-- <nav class="navbar rounded p-2"> --}}
+    {{-- <div class="row"> --}}
+    <form action="/booking" action="GET" class="container p-0">
+        @csrf
+        <div class="row d-flex align-items-center border rounded-3 mt-2 pt-2">
 
-        <form action="/booking" action="GET" class="w-100">
-            @csrf
-            <div class="row d-flex justify-content-between align-items-center">
+            <div class="col-lg-2 col-sm-12 mb-3">
+                <label class="form-label text-danger" id="basic-addon1">តួនាទី:</label>
+                <select class="form-control" name="directedBy" id="directedBy">
+                    <option value="">ជ្រើសរើស</option>
+                    <option value="ប្រធានអង្គភាព">
+                        ប្រធានអង្គភាព
+                    </option>
+                    <option value="អនុប្រធានអង្គភាព">អនុប្រធានអង្គភាព</option>
+                    @foreach ($departments as $key => $offices)
+                        <option value="ប្រធាននាយកដ្ឋាន{{ $key }}">
+                            ប្រធាននាយកដ្ឋាន
+                            {{ $key }}</option>
+                        <option value="អនុប្រធាននាយកដ្ឋាន{{ $key }}">
+                            អនុប្រធាននាយកដ្ឋាន
+                            {{ $key }}</option>
+                        @foreach ($offices as $key => $item)
+                            <option value="ប្រធានការិយាល័យ{{ $item }}">ប្រធានការិយាល័យ
+                                {{ $item }}</option>
 
-                <div class="col-lg-2 col-sm-6">
-                    <div class="input-group">
-                        <span class="input-group-text text-danger" id="basic-addon1">តួនាទី</span>
-                        <select class="form-control" name="directedBy" id="directedBy">
-                            <option value="">ជ្រើសរើស</option>
-                            <option value="ប្រធានអង្គភាព">
-                                ប្រធានអង្គភាព
-                            </option>
-                            <option value="អនុប្រធានអង្គភាព">អនុប្រធានអង្គភាព</option>
-                            @foreach ($departments as $key => $offices)
-                                <option value="ប្រធាននាយកដ្ឋាន{{ $key }}">
-                                    ប្រធាននាយកដ្ឋាន
-                                    {{ $key }}</option>
-                                <option value="អនុប្រធាននាយកដ្ឋាន{{ $key }}">
-                                    អនុប្រធាននាយកដ្ឋាន
-                                    {{ $key }}</option>
-                                @foreach ($offices as $key => $item)
-                                    <option value="ប្រធានការិយាល័យ{{ $item }}">ប្រធានការិយាល័យ
-                                        {{ $item }}</option>
+                            <option value="អនុប្រធានការិយាល័យ{{ $item }}">អនុប្រធានការិយាល័យ
+                                {{ $item }}</option>
+                        @endforeach
+                    @endforeach
+                </select>
+            </div>
 
-                                    <option value="អនុប្រធានការិយាល័យ{{ $item }}">អនុប្រធានការិយាល័យ
-                                        {{ $item }}</option>
-                                @endforeach
-                            @endforeach
-                        </select>
+            <div class="col-lg-2 col-sm-12 mb-3">
+                <label class="form-label text-danger" id="meetingLevel">កិច្ចប្រជុំ:</label>
+                <select class="form-control" name="meetingLevel" id="meetingLevel">
+                    <option value="">ជ្រើសរើស</option>
+                    @foreach ($meetingLevel as $key => $item)
+                        <option value="{{ $key }}">{{ $item }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-lg-2 col-sm-12 mb-3">
+                <label class="form-label text-danger" id="basic-addon1">បន្ទប់:</label>
+                <select class="form-control" name="room" id="basic-addon1">
+                    <option value="">ជ្រើសរើស</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                </select>
+            </div>
+
+            <div class="col-lg-2 col-sm-12 mb-3">
+                <label class="form-label text-danger" id="basic-addon1">ចាប់ពី:</label>
+                <input type="date" name="fromDate" min="{{ now()->subMonths(3)->format('Y-m-d') }}"
+                    max="{{ now()->format('Y-m-d') }}" class="form-control" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="col-lg-2 col-sm-12 mb-3">
+                <label class="form-label text-danger" id="basic-addon1">ដល់:</label>
+                <input type="date" name="toDate" class="form-control" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="col-lg-2 col-md-12 col-sm-12  mb-3">
+                <label class="form-label text-danger" for="search">ជម្រើស:</label>
+                <div class="dropdown">
+                    <button class="btn btn-success dropdown-toggle rounded w-100" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        មុខងារ
+                    </button>
+                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                        <input class="dropdown-item" type="submit" value="ស្វែងរក">
+                        <a href="/booking/export/excel" class="dropdown-item">ទាញយក</a>
                     </div>
                 </div>
-
-                <div class="col-lg-2 col-sm-6">
-                    <div class="input-group">
-                        <span class="input-group-text text-danger" id="meetingLevel">កិច្ចប្រជុំ</span>
-                        <select class="form-control" name="meetingLevel" id="meetingLevel">
-                            <option value="">ជ្រើសរើស</option>
-                            @foreach ($meetingLevel as $key => $item)
-                                <option value="{{ $key }}">{{ $item }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-sm-12">
-                    <div class="input-group">
-                        <span class="input-group-text text-danger" id="basic-addon1">បន្ទប់</span>
-                        <select class="form-control" name="room" id="basic-addon1">
-                            <option value="">ជ្រើសរើស</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-sm-12">
-                    <div class="input-group">
-                        <span class="input-group-text text-danger" id="basic-addon1">ចាប់ពី</span>
-                        <input type="date" name="fromDate" min="{{ now()->subMonths(3)->format('Y-m-d') }}"
-                            max="{{ now()->format('Y-m-d') }}" class="form-control" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-sm-12">
-                    <div class="input-group">
-                        <span class="input-group-text text-danger" id="basic-addon1">ដល់</span>
-                        <input type="date" name="toDate" class="form-control" aria-describedby="basic-addon1">
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-sm-12 d-flex justify-content-between gap-1">
-
+                {{-- <div id="search" class="d-flex justify-content-between gap-1">
                     <input class="btn btn-success text-white rounded" type="submit" value="ស្វែងរក">
                     <a href="/booking/export/excel" class="btn btn-success text-white rounded">ទាញយក</a>
-
-                </div>
+                </div> --}}
 
             </div>
-        </form>
 
-    </nav>
+        </div>
+    </form>
+    {{-- </div> --}}
+    {{-- </nav> --}}
 
     <div class="row table-responsive mt-20">
         <table class="table table-sm table-bordered">
