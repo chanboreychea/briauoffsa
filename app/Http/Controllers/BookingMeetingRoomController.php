@@ -28,7 +28,7 @@ class BookingMeetingRoomController extends Controller
         $regulator = Regulator::REGULATOR;
 
         $dateLastThirtyDay = $this->getDatesByPeriodName('last_30_days', Carbon::now());
-        
+
         $booking = DB::table('booking_meeting_rooms')
             ->join('guests', 'guests.bookingId', '=', 'booking_meeting_rooms.id')
             ->where('booking_meeting_rooms.date', '>=', $dateLastThirtyDay[0])
@@ -211,7 +211,7 @@ class BookingMeetingRoomController extends Controller
 
         $booking->save();
 
-        // $this->send($message);
+        $this->send($message);
 
         return redirect()->back()->with('message', 'ការធ្វើបច្ចុប្បន្នភាពទទួលបានជោគជ័យ​ សូមអរគុណ។');
     }
@@ -405,7 +405,7 @@ class BookingMeetingRoomController extends Controller
                 "កាលបរិច្ឆេទកិច្ចប្រជុំ៖ $date " . PHP_EOL .
                 "ម៉ោង៖ $times" . PHP_EOL . "កាលបរិច្ឆេទស្នើសុំ៖ $today" . PHP_EOL . "អ៊ីមែល: $email" . PHP_EOL . "ឈ្មោះមន្រ្តីស្នើសុំ៖ $name";
 
-            // $this->send($message);
+            $this->send($message);
             // $this->sendMessage(1499573227, $message, "7016210108:AAFqqisOdt9lCixJ7Hg1y9HYJosomMam2fc");
             // $this->sendMessage(-1002100151991, $message, "6914906518:AAH3QI2RQRA2CVPIL67B9p6mFtQm3kZwyvU");
 
