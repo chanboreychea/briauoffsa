@@ -312,6 +312,7 @@
         var times = document.querySelectorAll('.times');
         var timeArray = [];
         var dataFromBookingController = {!! json_encode($verifyTimesBooking) !!};
+        var pendingTimesBooking = {!! json_encode($pendingTimesBooking) !!};
         var departmentAndOffice = @json($departments);
 
 
@@ -369,6 +370,17 @@
                 explodedArray.forEach(function(substring) {
                     if (times[i].value == substring) {
                         times[i].classList.add("btn-danger");
+                        times[i].disabled = true;
+                    }
+                });
+            }
+
+            for (let j = 0; j < pendingTimesBooking.length; j++) {
+                var explodedArray = pendingTimesBooking[j]['time'].split(', ');
+                // Output each substring
+                explodedArray.forEach(function(substring) {
+                    if (times[i].value == substring) {
+                        times[i].classList.add("btn-warning");
                         times[i].disabled = true;
                     }
                 });

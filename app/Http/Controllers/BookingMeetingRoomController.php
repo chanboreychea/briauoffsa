@@ -315,7 +315,17 @@ class BookingMeetingRoomController extends Controller
                 'time',
             )->get();
 
-        return view('user.booking.showRoomAndTime', compact('departments', 'verifyTimesBooking', 'booking', 'now', 'date', 'day', 'regulator'));
+        $pendingTimesBooking = DB::table('booking_meeting_rooms')
+            ->where('date', $now->format('Y-m-d'))
+            ->where('isApprove', Status::PENDING)
+            ->select(
+                'room',
+                'time',
+            )->get();
+
+        // dd($pendingTimesBooking);
+
+        return view('user.booking.showRoomAndTime', compact('departments', 'verifyTimesBooking', 'pendingTimesBooking', 'booking', 'now', 'date', 'day', 'regulator'));
     }
 
     public function bookingRoom(Request $request)
