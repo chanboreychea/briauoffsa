@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Enum\MeetingLevel;
+use App\Enum\Regulator;
 use Illuminate\Support\Collection;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use Maatwebsite\Excel\Concerns\FromArray;
@@ -128,6 +129,7 @@ class BookingMeetingRoomExport implements WithTitle, WithDrawings, WithHeadings,
     {
         $booking = [];
         $meetingLevels = MeetingLevel::MEETING_LEVEL;
+        $regulators = Regulator::REGULATOR;
         $no = 0;
         foreach ($this->data as $key => $item) {
             $meeting = "";
@@ -137,6 +139,15 @@ class BookingMeetingRoomExport implements WithTitle, WithDrawings, WithHeadings,
                     break;
                 }
             }
+            $regulator = "";
+            foreach ($regulators as $key => $re) {
+                if ($item->regulator == $key) {
+                    $regulator = $re;
+                    break;
+                }
+            }
+            if ($item->meetingLevel == 9) $meeting = $meeting . ' ' . $regulator;
+            elseif ($item->meetingLevel == 6 || $item->meetingLevel == 4) $meeting = $meeting . ' ' . $item->interOfficeOrDepartmental;
             $booking[] = [
                 $no += 1,
                 $item->date,

@@ -112,10 +112,10 @@ class BookingMeetingRoomController extends Controller
         //$booking = $pending->where('date', '>=', Carbon::now()->format('Y-m-d'))->where('isApprove', Status::PENDING)->orderByDesc('date')->get();
 
         $departments = Department::DEPARTMENTS;
-
+        $regulators = Regulator::REGULATOR;
         $meetingLevel = MeetingLevel::MEETING_LEVEL;
 
-        return view('admin.booking.index', compact('isApproveBooking', 'departments', 'meetingLevel'));
+        return view('admin.booking.index', compact('isApproveBooking', 'departments', 'meetingLevel','regulators'));
     }
 
     public function exportBookingMeetingRoom(Request $request)
@@ -148,6 +148,7 @@ class BookingMeetingRoomController extends Controller
                 'directedBy',
                 'nameDirectedBy',
                 'meetingLevel',
+                'regulator',
                 'interOfficeOrDepartmental',
                 'member',
                 'room',

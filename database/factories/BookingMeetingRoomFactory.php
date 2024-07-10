@@ -26,11 +26,11 @@ class BookingMeetingRoomFactory extends Factory
         $directedBy[] = "អនុប្រធានអង្គភាព";
         $interOfficeOrDepartmental[] = null;
         foreach ($departments as $key => $department) {
-            $directedBy[] = "ប្រធាននាយកដ្ឋាន " . $key;
-            $directedBy[] = "អនុប្រធាននាយកដ្ឋាន " . $key;
+            $directedBy[] = "ប្រធាននាយកដ្ឋាន" . $key;
+            $directedBy[] = "អនុប្រធាននាយកដ្ឋាន" . $key;
             foreach ($department as $key => $office) {
-                $directedBy[] = "ប្រធានការិយាល័យ " . $office;
-                $directedBy[] = "អនុប្រធានការិយាល័យ " . $office;
+                $directedBy[] = "ប្រធានការិយាល័យ" . $office;
+                $directedBy[] = "អនុប្រធានការិយាល័យ" . $office;
                 $interOfficeOrDepartmental[] = $office;
             }
         }
