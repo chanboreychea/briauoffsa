@@ -115,7 +115,7 @@ class BookingMeetingRoomController extends Controller
         $regulators = Regulator::REGULATOR;
         $meetingLevel = MeetingLevel::MEETING_LEVEL;
 
-        return view('admin.booking.index', compact('isApproveBooking', 'departments', 'meetingLevel','regulators'));
+        return view('admin.booking.index', compact('isApproveBooking', 'departments', 'meetingLevel', 'regulators'));
     }
 
     public function exportBookingMeetingRoom(Request $request)
@@ -410,6 +410,12 @@ class BookingMeetingRoomController extends Controller
             ]);
 
             $today = Carbon::now();
+            $enumMeetingLevel = MeetingLevel::MEETING_LEVEL;
+            foreach ($enumMeetingLevel as $key => $item) {
+                if ($key == $meetingLevel) {
+                    $meetingLevel = $item;
+                }
+            }
 
             $message = "សំណើសុំប្រើប្រាស់បន្ទប់ប្រជុំ" . PHP_EOL . "ដឹកនាំដោយ៖ $directedBy " . PHP_EOL . "ឈ្មោះអ្នកដឹកនាំ៖ $nameDirectedBy " . PHP_EOL . "ប្រធានបទស្តីពី៖ $topic" . PHP_EOL .
                 "ចំនួនសមាជិកចូលរួម៖ $member រូប" . PHP_EOL . "ប្រភេទបន្ទប់ប្រជុំ៖ បន្ទប់ប្រជុំ $room" . PHP_EOL . "កម្រិតប្រជុំ៖ $meetingLevel" . PHP_EOL .
