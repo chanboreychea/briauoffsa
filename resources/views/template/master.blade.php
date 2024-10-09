@@ -228,14 +228,14 @@
                             all right
                             reserved</span>
                     </div>
-                    <div class="col-md-6 text-md-end text-start">
+                    {{-- <div class="col-md-6 text-md-end text-start">
                         <div class="footer-social">
                             <a class="font-xs color-text-paragraph" href="#">Privacy Policy</a>
                             <a class="font-xs color-text-paragraph mr-30 ml-30" href="#">Terms &amp;
                                 Conditions</a>
                             <a class="font-xs color-text-paragraph" href="#">Security</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DateTime;
 use DateInterval;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Http;
 
 abstract class Controller
 {
@@ -144,5 +145,20 @@ abstract class Controller
             $dates = [$startDate, $endDate];
         }
         return $dates;
+    }
+
+    public function fetchPermissionWithAuth($url, $token)
+    {
+        $response = Http::withToken($token)
+            ->withOptions([
+                'verify' => false,
+            ])
+            ->get($url);
+
+        if ($response->successful()) {
+            return $response->json();
+        } else {
+            return response()->json(['error' => 'Unauthorized'], $response->status());
+        }
     }
 }
