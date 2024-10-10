@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\BookingMeetingRoomController;
@@ -11,8 +11,8 @@ Route::get('/', [BookingMeetingRoomController::class, 'showBookingMeetingRooms']
 Route::get('/admins', function () {
     return view('adminLogin');
 })->name('admin-login');
-Route::post('/admins/login', [AuthController::class, 'login']);
-Route::get('/admins/logout', [AuthController::class, 'logout']);
+Route::post('/admins/login', [Auth::class, 'login']);
+Route::get('/admins/logout', [Auth::class, 'logout']);
 
 Route::middleware(['admin'])->group(function () {
 
@@ -20,7 +20,6 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/booking/approve/{bookingId}', [BookingMeetingRoomController::class, 'adminApprove']);
     Route::delete('/booking/{bookingId}', [BookingMeetingRoomController::class, 'adminDestroy']);
     Route::get('/booking/export/excel', [BookingMeetingRoomController::class, 'exportBookingMeetingRoom']);
-
 });
 
 Route::get('/login', function () {
@@ -38,4 +37,3 @@ Route::middleware(['user'])->group(function () {
 Route::get('/guests', [GuestController::class, 'index']);
 Route::get('/guests/request', [GuestController::class, 'getCode']);
 Route::get('/guests/login', [GuestController::class, 'loginWithGenerateCode']);
-
